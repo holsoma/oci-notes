@@ -1,0 +1,674 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Hybrid Cloud</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="e3c9a9b1-2597-466a-b72a-40fec73cb3ca" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🕐</span></div><h1 class="page-title">Hybrid Cloud</h1></header><div class="page-body"><p id="50b1fae6-3eb7-4b3f-aed1-d8d841f01a6f" class=""><strong>Hybrid Cloud</strong></p><ul id="99b28729-47ec-425a-b5f0-2b9a154a2b8c" class="bulleted-list"><li style="list-style-type:disc">deployment size (small or large) and deployment model (self-contained or remotely tethered)<ul id="1695dc70-8da9-4604-8fab-52415da406a6" class="bulleted-list"><li style="list-style-type:circle">self-contained model<ul id="5016d36d-1a58-47cc-8c68-8b4be402120c" class="bulleted-list"><li style="list-style-type:square">customers get the same billing model, operational model, security, and same set of services</li></ul></li></ul><ul id="589cd3e2-09e4-42f6-8e64-b490db6bd7c5" class="bulleted-list"><li style="list-style-type:circle">remotely tethered<ul id="3f50bbd6-cbc8-4b37-85e5-8716772ff627" class="bulleted-list"><li style="list-style-type:square">OCI exadata cloud@customer (hybrid cloud offering)</li></ul><ul id="a8f5afff-b48c-4728-9ba6-970b9184b57c" class="bulleted-list"><li style="list-style-type:square">the control plane or the service management runs in the public cloud to take advantage of existing services, governance, and operational control (hardware and data remain on prem)</li></ul><ul id="84deec88-5fe8-411e-885a-c3bff51efd27" class="bulleted-list"><li style="list-style-type:square">when you log onto the console, you can manage your cloud resources, as well as your on-premises resources - exadata cloud@customer (high performance, directly to a customer&#x27;s data center)</li></ul><ul id="3f6a2eef-d455-4771-8cc4-64d31ab0fc67" class="bulleted-list"><li style="list-style-type:square">why use remotely tethered?<ul id="020b335c-f1d5-4306-b8fa-03e4d2a9a684" class="bulleted-list"><li style="list-style-type:disc">ensure strict data sovereignty (data subject to laws of the country it is located in) and security by retaining all the data on prem</li></ul><ul id="fee32974-7f14-4c1d-95a1-df78f586789a" class="bulleted-list"><li style="list-style-type:disc">shift operational management to an OCI managed cloud service</li></ul><ul id="8a4f25c1-55aa-4ceb-8203-9301fecf7f7e" class="bulleted-list"><li style="list-style-type:disc">pretty big scale, not the same scale as a public cloud, but decent scale and performance</li></ul></li></ul></li></ul><ul id="67ba2f69-9cd8-4f5f-8fa4-9a698e83de91" class="bulleted-list"><li style="list-style-type:circle">roving edge infrastructure (self-contained model)<ul id="b8d12975-1e1a-4db7-baac-3c4c13e9f0c1" class="bulleted-list"><li style="list-style-type:square">small-size deployment</li></ul><ul id="2175c0fb-abe1-4e39-bacd-41d437a9dc20" class="bulleted-list"><li style="list-style-type:square">it is a service that extends fundamental OCI capabilities to a ruggedized device (hardware designed to have increased durability to tolerate harsh conditions - extreme temps, shocks, drops, water, dust)</li></ul><ul id="45fbd738-cccc-4677-8c4b-9c9d925c4df5" class="bulleted-list"><li style="list-style-type:square">key component is the roving edge device (RED)<ul id="7b977cf5-ca2e-4994-8176-44e9786a8150" class="bulleted-list"><li style="list-style-type:disc">high-powered and portable server node</li></ul><ul id="97e137e8-40ce-4339-b966-644dbc52e5b0" class="bulleted-list"><li style="list-style-type:disc">customers configure a RED in their OCI console with the same services, applications, and data they use in the cloud</li></ul><ul id="86fdebaa-1292-4c9b-829c-fc5c4e6cc113" class="bulleted-list"><li style="list-style-type:disc">devices are shipped to the customer<ul id="4082d0e0-58bb-4ad3-89ee-163287a3d314" class="bulleted-list"><li style="list-style-type:circle">for eg. you can use these devices in a remote location without internet connectivity, then take them to a transfer site once in a while to do a data-sync</li></ul><ul id="b3203e8b-afe9-4975-bb01-07433c1634b3" class="bulleted-list"><li style="list-style-type:circle">this device can do a certain subset of what you can do in public cloud in your own environment, even without internet connectivity</li></ul></li></ul></li></ul><p id="b9cd5ad5-69e0-4dad-b71c-f69a792ebeac" class="">
+</p></li></ul><ul id="92cab90b-190a-4b0b-8212-23cc878b2447" class="bulleted-list"><li style="list-style-type:circle">oracle cloud VMware solution (OCVS)<ul id="8a8b8414-e831-4587-8d54-469c880d1005" class="bulleted-list"><li style="list-style-type:square">VMware is the foundation of majority of enterprise data centers</li></ul><ul id="3c5ca4f6-ee8c-4c7f-86c2-872b033475c7" class="bulleted-list"><li style="list-style-type:square">to date, enterprises have chosen to deploy VMware with full control on-premises or delegate control to a managed service provider/hosting provider</li></ul><ul id="99e6c4d6-3f16-4e81-af89-9f434dd9382c" class="bulleted-list"><li style="list-style-type:square">in the past few years, customer started deploying their VMware workloads to different public clouds<ul id="35f36a35-68ab-4b91-9b96-20c38a90d16d" class="bulleted-list"><li style="list-style-type:disc">this is because public clouds offer benefits like just-in-time provisioning, elastic capacity scaling, and pay-for usage models (benefits not found in traditional data centers)</li></ul><ul id="f725a944-4565-4ea8-9091-058fbf32555d" class="bulleted-list"><li style="list-style-type:disc">however, running VMware in other public clouds require you to relinquish full control over administration, access and upgrades (other than oracle cloud!)</li></ul><ul id="438592a3-e11b-4ca8-b08a-66ebdc927932" class="bulleted-list"><li style="list-style-type:disc">oracle cloud VMware is the ONLY solution that provides a native VMware based cloud environment with complete control using familiar VMware tools<ul id="e8b5d93b-437a-462d-8877-e8ecf6af7c33" class="bulleted-list"><li style="list-style-type:circle">varying levels of control - low to high, across several dimensions</li></ul><ul id="5d71e6e8-d56c-456e-bd54-9ec5bbe3e668" class="bulleted-list"><li style="list-style-type:circle">customers can choose when and whether they want to upgrade their clusters (complete control over upgrade, patching)</li></ul><ul id="57faa763-185a-4eab-a243-e899356b0bd0" class="bulleted-list"><li style="list-style-type:circle">admin access is also a feature - they own root credentials and metadata for their cluster, and they can make changes</li></ul><ul id="b422afc2-6970-485e-be9c-64e69b149aa6" class="bulleted-list"><li style="list-style-type:circle">they have been managing VMware on prem themselves, they can do the same using this service to move or extend on prem workloads to OCI across all regions (including on prem dedicated regions without having to re-architect or retool any of the operations)</li></ul></li></ul><p id="55406837-3a18-42ec-88c9-e80d8cec061b" class="">
+</p><figure id="5bc77537-fe0e-4668-b99f-589f2476bbfd" class="image"><a href="Hybrid%20Cloud%20e3c9a9b12597466ab72a40fec73cb3ca/Untitled.png"><img style="width:766px" src="Hybrid%20Cloud%20e3c9a9b12597466ab72a40fec73cb3ca/Untitled.png"/></a></figure></li></ul></li></ul></li></ul><ul id="c815caa2-f30a-40d1-af52-92266e970190" class="bulleted-list"><li style="list-style-type:disc">hybrid cloud computing allows for security, consistent management, and control</li></ul><p id="e99f8a8c-9d58-4227-b77c-521b48e6ac7b" class="">
+</p><p id="bbe2ebfc-7425-4aaa-9ee1-84a4916397a1" class=""><strong>Dedicated Regions</strong></p><ul id="e5f96567-e952-456f-acef-2ffa0f45b7f9" class="bulleted-list"><li style="list-style-type:disc">secure, 99.95% availability, meets data residency and latency requirements, self-contained cloud region</li></ul><ul id="8a9acd99-19fc-40a8-877e-a84b900805a3" class="bulleted-list"><li style="list-style-type:disc">fully managed cloud region that brings all of our cloud services into customer data centers (in a self-contained model)</li></ul><ul id="2bca8f41-f067-4d43-be39-bd39bc8e4d96" class="bulleted-list"><li style="list-style-type:disc">what does that mean?<ul id="77114851-c27a-445e-8a8d-23e8af414cc6" class="bulleted-list"><li style="list-style-type:circle">we put the exact same software (control plane, data plane  - as in the public cloud) and hardware into your data centers</li></ul></li></ul><ul id="227aa384-6a54-48a7-afa4-97d5c368b1df" class="bulleted-list"><li style="list-style-type:disc">why would we do this?<ul id="82a4d916-542e-44db-bf29-aecf16b77281" class="bulleted-list"><li style="list-style-type:circle">for data sovereignty and compliance</li></ul><ul id="6cb5de05-4a2a-4902-8974-0884255c4fb7" class="bulleted-list"><li style="list-style-type:circle">many industries have strong regulations, so you want to keep data on prem (best of both worlds) - you get operational scalability, manageability, security</li></ul><ul id="c0e285a9-8055-4104-90cb-1cf6f0e72f30" class="bulleted-list"><li style="list-style-type:circle">this is completely symmetric, no other cloud vendor as this kind of capability existing today<ul id="4cf84082-3e3c-4bdd-8c63-96dbc400165d" class="bulleted-list"><li style="list-style-type:square">more than 80 services available in the public cloud, and are available in the dedicated region as well</li></ul><ul id="73e973c5-aa46-4e0f-9e26-9a902890e588" class="bulleted-list"><li style="list-style-type:square">same operation model, same SLAs</li></ul><ul id="44f1f6a2-aea1-4333-8aa5-cb021f7030ee" class="bulleted-list"><li style="list-style-type:square">same economics - pay as you go model, same support model</li></ul></li></ul></li></ul><p id="9d264865-6acc-47a2-927b-0b2a493ff881" class="">
+</p><p id="5eac9495-a2c0-40c7-bb3f-f19d8000ddfa" class=""><strong>Oracle Cloud VMware solution</strong></p><ul id="455357a2-fa66-4301-9b93-821ee11a580a" class="bulleted-list"><li style="list-style-type:disc">just in time provisioning, elastic capacity, ability to scale up and down, pay for usage model</li></ul><ul id="314738ee-d876-4ec7-845a-d7be243301b2" class="bulleted-list"><li style="list-style-type:disc">traditional cloud services require giving up full control over administration, access and upgrades</li></ul><ul id="2c54ba5a-1c3d-45e9-a850-27f703f99219" class="bulleted-list"><li style="list-style-type:disc">OCI offers all these benefits while still giving VMware administrators full control over their environment (we are running VMware on OCI on top of bare metal compute instances, but you have all VMware software running on it)<ul id="c35c9061-69bb-4fda-b428-b25d8c84deaa" class="bulleted-list"><li style="list-style-type:circle">integrated solution (VMware software + OCI infrastructure like bare metal compute [that you can expand at will]</li></ul><ul id="59957a6c-3444-4bb3-9684-c4358e5ad600" class="bulleted-list"><li style="list-style-type:circle">adv: you can upgrade and patch your clusters, log in as root users, and don’t need to follow what the cloud provider is doing</li></ul></li></ul><ul id="f76cd460-4e71-4eb0-a76c-cdebca99d34c" class="bulleted-list"><li style="list-style-type:disc">you don’t feel a difference between on prem and cloud, you can leverage the same experience, tools and processes that you are running on prem</li></ul><p id="2faaea36-6b62-448e-88c4-c76c50e42706" class="">
+</p></div></article></body></html>
