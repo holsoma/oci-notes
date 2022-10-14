@@ -1,0 +1,670 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Identity and Access Management (IAM)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="b87d15d3-650d-4143-8a0a-b0a83374d03e" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">4️⃣</span></div><h1 class="page-title">Identity and Access Management<strong> (IAM)</strong></h1></header><div class="page-body"><nav id="8c6aec4b-1240-49b7-a8e0-a7f9e1568f9e" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d70052ec-3973-461d-b436-b6868a0b5ff8">IAM Introduction</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1e7ca763-b821-4f03-a503-d704b0727843">What is IAM?</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a890615d-724d-457d-898a-cbf16252092e">Identity Domains</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#db95bff5-12e4-491d-8c6a-0b073f2e982a">Free Identity Domain</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#57f694d0-375f-4db8-ae68-42f45c47e125">Oracle Apps Premium</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#734dd301-cf17-4aab-aeba-7009c64654f8">Premium Domain</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0188313c-db0a-4f1a-bff5-8011789cbc8e">External User</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4b390f44-aec1-4f52-919c-401a37bf4ef1">AuthN</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cdfc2bc8-c349-42e6-bd2e-9007c1390c34">What is a Principal?</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b68029b2-3fd6-42ec-8f5e-6f2d7ff96b66">Groups</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#affa32b7-81c7-4418-808f-cb0dbc1e508c">AuthN Mechanisms</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#411b425f-b520-4cd9-aea3-03eeb00578b1">AuthZ</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#826911ef-7d9b-4adb-ab49-7d2a97a07da4">Subjects</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b11509b5-02f0-44bd-8754-ac01b43f55f5">Actions</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e46f009e-f3d6-42b2-88c9-eb2141fa6e6b">Common IAM Policies</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#212ff089-81a4-4ebb-95ec-4beb945b6ce6">Compartments</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e6c05f13-716d-408a-8d61-472445735931">Compartment Quota and Budget</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#723f62e9-2fa1-4073-9ed7-460ce35fc78b">Policy Inheritance and Attachment for Compartments</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4734117c-9720-459c-b5e3-36fe9ea945df">Conditional Policies</a></div></nav><h1 id="d70052ec-3973-461d-b436-b6868a0b5ff8" class="">IAM Introduction</h1><h2 id="1e7ca763-b821-4f03-a503-d704b0727843" class="">What is IAM?</h2><ul id="82d564f1-3736-4569-88b3-f0df6cf05a92" class="bulleted-list"><li style="list-style-type:disc">a way for us to segregate users, give fine-grained access control</li></ul><ul id="85a31d0d-c9b1-4292-bde4-bb8027a3e1ac" class="bulleted-list"><li style="list-style-type:disc">each user is assigned one or more predetermined roles, each role with a set of permissions</li></ul><ul id="d458a5c6-43ab-4938-b581-0082ff5ba9f7" class="bulleted-list"><li style="list-style-type:disc">two main concepts, authentication AuthN (who someone is or claims to be) and authorization AuthZ (permissions, what someone is allowed to do)</li></ul><ul id="ec578d78-b229-4cf0-900e-8874130e4d87" class="bulleted-list"><li style="list-style-type:disc">logical containers called identity domains to separate users</li></ul><ul id="18bace09-4541-4576-99af-62fb955c2f2b" class="bulleted-list"><li style="list-style-type:disc">logical containers called compartments to separate resources</li></ul><ul id="5e59339a-f00c-45a8-b5c5-96c207faec75" class="bulleted-list"><li style="list-style-type:disc">every resource you create in OCI is an object, you can identify these resources by their OCID<ul id="4bad15d6-04b3-4ecb-b02b-c29aaf2284a2" class="bulleted-list"><li style="list-style-type:circle">ocid1.&lt;RESOURCE TYPE&gt;.&lt;REALM&gt;.[REGION].[.FUTURE USE].&lt;UNIQUE ID&gt;</li></ul></li></ul><h1 id="a890615d-724d-457d-898a-cbf16252092e" class="">Identity Domains</h1><ul id="9015e726-7a8f-4103-9866-36e2152c35da" class="bulleted-list"><li style="list-style-type:disc">represents a user population in OCI and associated configurations and security settings</li></ul><ul id="a63b51f3-9ece-493f-a745-f3363f177664" class="bulleted-list"><li style="list-style-type:disc">think of it as a container for managing users, roles, federation, SSO and other things like MFA</li></ul><ul id="6b76a888-3a07-45fa-a964-e5579f225d76" class="bulleted-list"><li style="list-style-type:disc">you can construct IDs to separate<ul id="c71dc757-44a9-42d9-9cd0-005d51167ff6" class="bulleted-list"><li style="list-style-type:circle">production and development environment </li></ul><ul id="091907a1-ce2d-41ee-97da-ac70ca103a57" class="bulleted-list"><li style="list-style-type:circle">employees and non-employees</li></ul></li></ul><ul id="2f5fcdc5-9a6a-48a2-86d9-7bf5a827b4a6" class="bulleted-list"><li style="list-style-type:disc">you can switch identity domain type and create additional identity domains</li></ul><ul id="b3702711-85b2-447f-a994-8bb156569eeb" class="bulleted-list"><li style="list-style-type:disc">IDs are resources which reside inside of a compartment</li></ul><h2 id="db95bff5-12e4-491d-8c6a-0b073f2e982a" class="">Free Identity Domain</h2><ul id="973b695d-c7fd-4601-bdcf-6c414d36f52b" class="bulleted-list"><li style="list-style-type:disc">default identity domain to manage access to all OCI resources</li></ul><ul id="188ba981-3269-4c9e-849b-0048523b46ad" class="bulleted-list"><li style="list-style-type:disc">good if they don’t want to create anything additional</li></ul><h2 id="57f694d0-375f-4db8-ae68-42f45c47e125" class="">Oracle Apps Premium</h2><ul id="9f460f1e-1ef0-4b8b-956b-0ae699f633ab" class="bulleted-list"><li style="list-style-type:disc">helps manage SaaS, PaaS, GBU applications</li></ul><ul id="ad8ef4de-4137-4cb8-a902-af4cd5c6016f" class="bulleted-list"><li style="list-style-type:disc">helps manage on prem applications (JD Edwards, PeopleSoft, Oracle Linux, Oracle DB, etc.)</li></ul><ul id="013f57a5-3738-4c96-8a3f-094416dd9938" class="bulleted-list"><li style="list-style-type:disc">supports hybrid IAM use cases (on prem + cloud)</li></ul><h2 id="734dd301-cf17-4aab-aeba-7009c64654f8" class="">Premium Domain</h2><ul id="5c0dcccc-437c-447e-b2b9-9173d672c2a7" class="bulleted-list"><li style="list-style-type:disc">highest SKU</li></ul><ul id="fdbe430d-7af7-4cb0-ac22-d284d0d69d31" class="bulleted-list"><li style="list-style-type:disc">you can use Oracle or non-Oracle apps</li></ul><ul id="7bb5d555-b05c-4b19-a145-5eaaa7a67116" class="bulleted-list"><li style="list-style-type:disc">supports hybrid IAM use cases (on prem + cloud)</li></ul><h2 id="0188313c-db0a-4f1a-bff5-8011789cbc8e" class="">External User</h2><ul id="0ebaca83-2a6f-4690-b33c-7ffc8d7e336a" class="bulleted-list"><li style="list-style-type:disc">used for consumer and non employee use cases<ul id="0d4859d4-aa7f-4abd-8e39-b8ae2da6d07e" class="bulleted-list"><li style="list-style-type:circle">give contractors access</li></ul><ul id="15bad441-3642-4527-a0b6-a52f01e9396b" class="bulleted-list"><li style="list-style-type:circle">manage application that can scale to millions of users</li></ul></li></ul><ul id="004a9908-3adb-4ecb-ae58-249222ccac11" class="bulleted-list"><li style="list-style-type:disc">features like social login, self-service, password management, etc.</li></ul><ul id="9a783dc0-c47b-4768-ae3e-d213165fd5e9" class="bulleted-list"><li style="list-style-type:disc">some support for hybrid features</li></ul><h1 id="4b390f44-aec1-4f52-919c-401a37bf4ef1" class="">AuthN</h1><h2 id="cdfc2bc8-c349-42e6-bd2e-9007c1390c34" class="">What is a Principal?</h2><ul id="60159a00-d1a2-488f-b304-cfaeda002dc5" class="bulleted-list"><li style="list-style-type:disc">an IAM entity that is allowed to interact with OCI resources</li></ul><ul id="7e7a279c-86c9-436a-b3e6-49f25984d1aa" class="bulleted-list"><li style="list-style-type:disc">can be users, resources or services themselves<ul id="42a3c8b1-1a65-4157-a2fd-2e5a54abe644" class="bulleted-list"><li style="list-style-type:circle">instance principal - a compute instance that lets instances and applications running on those instances make API calls against other OCI services</li></ul></li></ul><h2 id="b68029b2-3fd6-42ec-8f5e-6f2d7ff96b66" class="">Groups</h2><ul id="d4703dcd-dc04-4a2d-951e-4caecbd01cd4" class="bulleted-list"><li style="list-style-type:disc">collection of users who all need the same type of access to resources<ul id="1d6bf5af-76f9-47cb-8fe9-942b84f54d6f" class="bulleted-list"><li style="list-style-type:circle">network-user group - for users who create networks</li></ul><ul id="0cb26067-3bb2-4df2-8f8d-16399209b879" class="bulleted-list"><li style="list-style-type:circle">network-admin group - for users who administer or manage networks</li></ul></li></ul><h2 id="affa32b7-81c7-4418-808f-cb0dbc1e508c" class="">AuthN Mechanisms</h2><ul id="ea696cb6-a143-4186-94a7-b27bf4fe4197" class="bulleted-list"><li style="list-style-type:disc">username + password</li></ul><ul id="11eb8bd3-f7db-459a-9b94-01696c55128b" class="bulleted-list"><li style="list-style-type:disc">API signing keys (used when you call the OCI CLI, SDK or when you write your applications) <ul id="4a75c107-350d-456d-989f-ecdfd1c94df9" class="bulleted-list"><li style="list-style-type:circle">RSA key pair, public and private key</li></ul></li></ul><ul id="98e5ed98-c3d4-4376-984c-4b6bd099f94b" class="bulleted-list"><li style="list-style-type:disc">auth tokens<ul id="252f1c61-9c33-4c69-b189-65d1d12e4281" class="bulleted-list"><li style="list-style-type:circle">oracle-generated token strings</li></ul><ul id="30a2e9a4-37a4-4694-bcc6-1ac79d7044ef" class="bulleted-list"><li style="list-style-type:circle">each user can generate up to two auth tokens that don’t expire and can authenticate third party APIs</li></ul><ul id="c95c61f6-1b53-439f-8600-73428a39f17d" class="bulleted-list"><li style="list-style-type:circle">use case: Docker registry, because it doesn’t understand OCI signature-based authentication</li></ul></li></ul><h1 id="411b425f-b520-4cd9-aea3-03eeb00578b1" class="">AuthZ</h1><ul id="963d9fb0-7219-45db-a813-5ad031f3993f" class="bulleted-list"><li style="list-style-type:disc">done through IAM policies</li></ul><ul id="e1f277f7-cc88-4d70-a28a-0d8eced55ed1" class="bulleted-list"><li style="list-style-type:disc">starts with ALLOW &lt;subjects&gt; to &lt;action&gt; in &lt;placement&gt;  WHERE &lt;condition&gt;</li></ul><figure id="2c6e9855-12a9-4785-9888-1a038c19c31b" class="image"><a href="Identity%20and%20Access%20Management%20(IAM)%20b87d15d3650d41438a0ab0a83374d03e/Untitled.png"><img style="width:685px" src="Identity%20and%20Access%20Management%20(IAM)%20b87d15d3650d41438a0ab0a83374d03e/Untitled.png"/></a></figure><ul id="4141d2e2-319f-4410-91fb-c298ddb9941d" class="bulleted-list"><li style="list-style-type:disc">by default, everything is denied</li></ul><ul id="01ddd963-6679-45b8-97a9-906dfde7b041" class="bulleted-list"><li style="list-style-type:disc">no deny policy by default, because everything is denied</li></ul><ul id="8fa5b2fd-8cb7-43c3-b756-b6e4bbcd711d" class="bulleted-list"><li style="list-style-type:disc">remember: you write policies on groups, NOT users</li></ul><ul id="91e5015f-afd4-4721-be98-5b724083883c" class="bulleted-list"><li style="list-style-type:disc">you can write policies for dynamic groups (links specific instances in the compartment and provides security and enables you to manage keys on client side rather than server) as well to grant a particular service</li></ul><h2 id="826911ef-7d9b-4adb-ab49-7d2a97a07da4" class="">Subjects</h2><ul id="d03f13c1-b87f-4cd8-b0e0-2406a2fe263c" class="bulleted-list"><li style="list-style-type:disc">subject’s clause is your principal actor, you can define it <ul id="93752c9c-1c41-47f3-8156-6d2e1def508e" class="bulleted-list"><li style="list-style-type:circle">by their membership, role requirements (group of administrators) using name or group id</li></ul><ul id="6839f40c-1a2b-499d-87be-f31515197c89" class="bulleted-list"><li style="list-style-type:circle">for a particular service (OSS)<ul id="af4fb0e5-4d9b-4313-9a64-bc6bd8fcf20e" class="bulleted-list"><li style="list-style-type:square">you would do this to allow replication (copy of OSS object from one region to another region)</li></ul></li></ul></li></ul><ul id="61216e8e-a87b-482e-b202-a7a9d10668a5" class="bulleted-list"><li style="list-style-type:disc">you can use subject’s clause with “any-user”, meaning that anybody who is part of that account can do something</li></ul><ul id="057bf203-c4a4-4b26-9e2b-da3b5b033c4a" class="bulleted-list"><li style="list-style-type:disc">more than one group can be named in subjects element</li></ul><ul id="a4541c04-64ba-4b2d-a739-e354370e882e" class="bulleted-list"><li style="list-style-type:disc">you need to prefix your subjects with an identity domain, if you don’t do it, it will go to the default ID</li></ul><h2 id="b11509b5-02f0-44bd-8754-ac01b43f55f5" class="">Actions</h2><ul id="d1c4c8b9-b109-4dc0-8e1c-49f593e5f7f8" class="bulleted-list"><li style="list-style-type:disc">inspect, read, use and manage (access level increases as you go down the hierarchy)<ul id="10a2e04c-54a9-4297-b19f-a5c8c88801d8" class="bulleted-list"><li style="list-style-type:circle">inspect - observe, enumerate and monitor, without access to confidential information</li></ul><ul id="aeade0b6-ecf1-442b-a186-571e496093fc" class="bulleted-list"><li style="list-style-type:circle">read - access without altering resources</li></ul><ul id="aee8bad9-8ecb-4d47-ae6b-b3fd24a5b95b" class="bulleted-list"><li style="list-style-type:circle">use - modify pre-existing resources (re-encrypt objects using a different key version)</li></ul><ul id="1741d0b1-1b88-420a-90e2-eddacd4828cc" class="bulleted-list"><li style="list-style-type:circle">manage - do anything to the resource kind (create and delete objects)</li></ul></li></ul><ul id="e10fde47-4494-4f48-a60a-692cb0a1a3e9" class="bulleted-list"><li style="list-style-type:disc">resource type (second part of action clause)<figure id="00d557b4-bd9a-431a-8861-53e611e2cb93" class="image"><a href="Identity%20and%20Access%20Management%20(IAM)%20b87d15d3650d41438a0ab0a83374d03e/Untitled%201.png"><img style="width:699px" src="Identity%20and%20Access%20Management%20(IAM)%20b87d15d3650d41438a0ab0a83374d03e/Untitled%201.png"/></a></figure><ul id="1faffe93-26f2-4d99-a840-66ee448d2522" class="bulleted-list"><li style="list-style-type:circle">some resource types don’t have aggregate resource types (like identity)</li></ul></li></ul><h1 id="e46f009e-f3d6-42b2-88c9-eb2141fa6e6b" class="">Common IAM Policies</h1><ul id="c32634b5-32ed-4c2f-b019-5c41ac5609be" class="bulleted-list"><li style="list-style-type:disc">common policies can be found on the OCI documentation website<ul id="9036f743-5b34-49c1-80bc-8e8ffc3583a0" class="bulleted-list"><li style="list-style-type:circle">let network admins manage cloud network</li></ul><ul id="7aaea81d-d29e-4e83-84d0-a5073ac1baa1" class="bulleted-list"><li style="list-style-type:circle">let users launch compute instances</li></ul></li></ul><h1 id="212ff089-81a4-4ebb-95ec-4beb945b6ce6" class="">Compartments</h1><ul id="43dc6ab5-4831-408b-b58e-c07ef3133530" class="bulleted-list"><li style="list-style-type:disc">your account/tenancy is sometimes referred to as root compartment</li></ul><ul id="b7fccb2b-a9fe-4321-839a-0f3efc79c21a" class="bulleted-list"><li style="list-style-type:disc">compartments are logical containers (not physical) that does not need to be service specific<ul id="2ec0cc94-2927-49d7-b45f-668b542b5b40" class="bulleted-list"><li style="list-style-type:circle">you can have compartments for projects, applications, whichever way you want to organize</li></ul><ul id="d36716b3-2dc5-40e9-8f2e-ba15c1199a9a" class="bulleted-list"><li style="list-style-type:circle">isolate and control access</li></ul></li></ul><ul id="29a85f34-3058-431a-b0c2-4382e66f95f6" class="bulleted-list"><li style="list-style-type:disc">each resource belongs to a single compartment</li></ul><ul id="894d0024-9ecc-492c-bf36-2838e818c936" class="bulleted-list"><li style="list-style-type:disc">you can write policies for users, grouped in groups, to control access to the compartments (authZ)</li></ul><ul id="a6dfbe80-5531-4a83-9ae5-d9ffd0bd98be" class="bulleted-list"><li style="list-style-type:disc">resources in different compartments can interact with each other<ul id="dcc9a924-30cd-459b-9e44-2ca154ee4f10" class="bulleted-list"><li style="list-style-type:circle">VCN can be in one compartment, VM can be in another</li></ul></li></ul><ul id="d2f97a80-b58a-4b91-9b85-ad7612f927b7" class="bulleted-list"><li style="list-style-type:disc">resources from multiple regions can be in the same compartment (a compartment is global)</li></ul><ul id="2a7d2bc5-a12d-446d-bf50-40a36d12c894" class="bulleted-list"><li style="list-style-type:disc">compartments can be nested, 6 levels deep</li></ul><h2 id="e6c05f13-716d-408a-8d61-472445735931" class="">Compartment Quota and Budget</h2><ul id="71a7adad-bfd9-4d0c-b6ad-568b20bde4c8" class="bulleted-list"><li style="list-style-type:disc">you can set quotas or budgets on a compartment<ul id="6bcd4ea9-0d12-47ff-9824-c44cdad8eff8" class="bulleted-list"><li style="list-style-type:circle">if budget is exceeded, you will get notified</li></ul></li></ul><ul id="f6e23641-8b72-4abf-8783-3fa705c80ae6" class="bulleted-list"><li style="list-style-type:disc">compartment quotas are similar to service limits, biggest difference is that service limits are set by Oracle, while compartment quotas are set by administrators using policies to flexibly allocate resources</li></ul><ul id="36e74564-d505-46a0-aaa4-960b3f1f9636" class="bulleted-list"><li style="list-style-type:disc">quota policies<ul id="7b018bb1-fa45-4742-8ff7-07933140e4ea" class="bulleted-list"><li style="list-style-type:circle">set max limit, or set to zero so resources cannot be created</li></ul><ul id="178f683c-39ba-4bb0-86c0-a4a0ad933844" class="bulleted-list"><li style="list-style-type:circle">restrict all users with access to this compartment to provision compute instances (users with access to other compartments will still be able to provision)</li></ul></li></ul><ul id="8a6dc9c0-c63e-4697-a297-ccfcbb3dc378" class="bulleted-list"><li style="list-style-type:disc">budgets let you know how much resource consumption is happening and helps you make sure usage is not exceeding a particular budget you have<ul id="91acfcd9-e0e7-4852-a4b3-c7b52e9a29c4" class="bulleted-list"><li style="list-style-type:circle">budget amount can be an absolute number or a percentage of the budget</li></ul><ul id="02ab6345-7add-46b9-8b6e-09dc8bb6608a" class="bulleted-list"><li style="list-style-type:circle">send email or alert when budget is exceeded</li></ul></li></ul><h1 id="723f62e9-2fa1-4073-9ed7-460ce35fc78b" class="">Policy Inheritance and Attachment for Compartments</h1><ul id="632701ae-e232-46a0-85bd-52d73a46c55d" class="bulleted-list"><li style="list-style-type:disc">compartments inherit any policies form their parent compartment<ul id="dbe8d1c3-186c-4dde-a157-7dc111b56123" class="bulleted-list"><li style="list-style-type:circle">built in policy for Administrators applies to all child compartments, so Admins can do anything in the compartments in the tenancy</li></ul><ul id="8ecff333-a5ba-46a3-9f29-33151d04593e" class="bulleted-list"><li style="list-style-type:circle">capability to manage any of the compartments downstream</li></ul></li></ul><ul id="e8ddb1e0-3755-4ef6-a881-7a7f709e5c23" class="bulleted-list"><li style="list-style-type:disc">attachment of policy to a compartment<ul id="85b8cddb-f90a-428b-a45b-42591622eba1" class="bulleted-list"><li style="list-style-type:circle">compartment A &gt; B &gt; C</li></ul><ul id="a7ed7430-97bb-4cca-a0cb-47340bd7cb8c" class="bulleted-list"><li style="list-style-type:circle">if you want to write a policy to manage networks in C, you can write it in C or B, but you have to provide a complete path when you write it in A (because A can only see immediate children, can’t see two level children)</li></ul><figure id="e6edf945-5f22-4358-9af1-a85b2eb12824" class="image"><a href="Identity%20and%20Access%20Management%20(IAM)%20b87d15d3650d41438a0ab0a83374d03e/Untitled%202.png"><img style="width:1050px" src="Identity%20and%20Access%20Management%20(IAM)%20b87d15d3650d41438a0ab0a83374d03e/Untitled%202.png"/></a></figure><ul id="0ca0d57e-8d97-4dfe-8567-12c4be2f0d5e" class="bulleted-list"><li style="list-style-type:circle">attachment of policies to a compartment also means that users will not be able to delete or change policies upstream, if they don’t have access</li></ul></li></ul><h1 id="4734117c-9720-459c-b5e3-36fe9ea945df" class="">Conditional Policies</h1><figure id="d05eab2e-66c1-4bd2-95ae-5211698c32a6" class="image"><a href="Identity%20and%20Access%20Management%20(IAM)%20b87d15d3650d41438a0ab0a83374d03e/Untitled%203.png"><img style="width:1049px" src="Identity%20and%20Access%20Management%20(IAM)%20b87d15d3650d41438a0ab0a83374d03e/Untitled%203.png"/></a></figure><ul id="705ce588-a65f-4795-ba3f-72b22ae7b2c9" class="bulleted-list"><li style="list-style-type:disc">placement is your compartments or tenancy, where you can write advanced policies by putting these conditions where you can use the keyword WHERE and the condition is evaluated to true/false or not applicable</li></ul><ul id="1c42f2db-7c33-4013-bb2a-496ea69ee654" class="bulleted-list"><li style="list-style-type:disc">conditions allow more complicated and advanced fine-grain access control<ul id="0e9d33c3-5967-4d4a-a839-fc708af0f24f" class="bulleted-list"><li style="list-style-type:circle">you use variables when writing conditional statements</li></ul><ul id="353902a5-c57b-4b80-a5cc-3042584eee4c" class="bulleted-list"><li style="list-style-type:circle">variables are hierarchically named, prefixed accordingly with either request or target followed by a period</li></ul><figure id="46a4b526-eb3a-40bf-ac7e-8d482f3251a6" class="image"><a href="Identity%20and%20Access%20Management%20(IAM)%20b87d15d3650d41438a0ab0a83374d03e/Untitled%204.png"><img style="width:1041px" src="Identity%20and%20Access%20Management%20(IAM)%20b87d15d3650d41438a0ab0a83374d03e/Untitled%204.png"/></a></figure><p id="36e07b7c-16f0-4f94-875f-84ae51e99754" class="">
+</p><ul id="126299f1-28fb-4f35-88bc-95430def32d6" class="bulleted-list"><li style="list-style-type:circle">you can use strings and patterns in conditions</li></ul></li></ul><figure id="87ca224b-5999-4a2f-ab34-abb74c13c88f" class="image"><a href="Identity%20and%20Access%20Management%20(IAM)%20b87d15d3650d41438a0ab0a83374d03e/Untitled%205.png"><img style="width:1051px" src="Identity%20and%20Access%20Management%20(IAM)%20b87d15d3650d41438a0ab0a83374d03e/Untitled%205.png"/></a></figure></div></article></body></html>
