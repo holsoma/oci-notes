@@ -1,0 +1,669 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Networking - Virtual Cloud Network</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c4a9acfa-c474-4e36-84ba-5d1d3eaab0d9" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">5️⃣</span></div><h1 class="page-title">Networking - Virtual Cloud Network</h1></header><div class="page-body"><nav id="bd69eb01-9eaf-4d02-bba4-f418b597f8d8" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#2ea6131e-63d9-4b25-a57f-010c3e47458e">Introduction to VCN</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#4c13fafd-b329-4c7e-b71b-05898b4eb1a0">CIDR</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#63d0d53b-8efa-43cf-8be5-014c1b1db8e7">RFC 1918</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8151d0fc-e75a-41d9-b8f2-cdf45ea6c9b3">Introduction to Subnets</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#45395dc1-9674-4e78-a085-3fbd335e7db0">Security Lists</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0f36d311-aa91-4c6b-8145-20eeb932226c">Network Security Groups</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#92fad72b-ca4c-4f1a-ae3f-4c2a4ac5f0a2">Bastion</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b65657ff-d5b1-4e11-963d-096a0ef1734a">What is the OCI Bastion Service?</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#41b7aa9c-9e9c-40a0-b7ea-24990eecf8f2">What can I access with OCI Bastion Service?</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#dacd104e-4496-40f6-9c4e-1271f4e8ed18">Bastion Works with Different Networking Architectures</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#498c08ea-cac7-42ae-83f5-eff44d8b8c4e">Internet Gateway</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#49cb6b17-69b4-4fbf-8c75-46635a02f250">NAT Gateway</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fe2add92-6542-4e72-b281-38ff2e617563">Service Gateway</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#46ea0322-7ba2-4b18-8cfb-f61ad6af4573">Local Peering Gateway</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f26d57fc-a20d-42ad-b4e7-478dff772891">Route Tables</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a89ce2d8-9552-4376-870d-52e4f15de95c">Skill Check</a></div></nav><h1 id="2ea6131e-63d9-4b25-a57f-010c3e47458e" class="">Introduction to VCN</h1><ul id="e354c006-5cbc-4269-b07f-ad7f11b93453" class="bulleted-list"><li style="list-style-type:disc"><strong>region</strong><ul id="91839fde-fda9-45a2-9d12-b8bcca239638" class="bulleted-list"><li style="list-style-type:circle">a localized geographical area that is composed of one or more ADs</li></ul></li></ul><ul id="88ac9a50-9ef1-400e-8da8-53dcc88c2226" class="bulleted-list"><li style="list-style-type:disc"><strong>availability domain</strong><ul id="6bbedfcc-64a5-463a-a542-474ad0a920b4" class="bulleted-list"><li style="list-style-type:circle">one or more fault tolerant and isolated data centers that are very close to each other</li></ul><ul id="7719f1e3-c2d3-41f8-a26d-fec562b3a108" class="bulleted-list"><li style="list-style-type:circle">proximity among them allows for high availability, low latency and high throughput</li></ul></li></ul><ul id="5b19510c-2426-4f16-92de-bacda913da2f" class="bulleted-list"><li style="list-style-type:disc"><strong>fault domain</strong><ul id="b9f7c7ee-f72c-4e01-a4e5-71d9c843a28a" class="bulleted-list"><li style="list-style-type:circle">a grouping of hardware and infrastructure within an AD</li></ul><ul id="d3dc4639-9ec0-4065-ab3c-5aef016dc2de" class="bulleted-list"><li style="list-style-type:circle">each AD has 3 FDs</li></ul></li></ul><ul id="f2e05dde-e126-4af0-8f8c-1119a3110911" class="bulleted-list"><li style="list-style-type:disc"><strong>virtual cloud network</strong><ul id="9b49ac0a-54c6-4b21-998d-bc1536bdae2b" class="bulleted-list"><li style="list-style-type:circle">a virtual representation of a physical network, similar to the one you find on-prem</li></ul><ul id="e0cd75bf-8c87-4eb4-9a5c-4c773e731748" class="bulleted-list"><li style="list-style-type:circle">resides in a single region</li></ul><ul id="cf8114de-cac9-4298-b172-c13015c737f5" class="bulleted-list"><li style="list-style-type:circle">can have one or more non-overlapping IPv4 CIDR blocks of your choice</li></ul><ul id="f72e2610-2601-4408-992d-eed7bddcfbb9" class="bulleted-list"><li style="list-style-type:circle">CIDR blocks/prefixes can be modified after VCNs are created (eg. /16 to /17)</li></ul><ul id="b220e855-2246-4551-a844-cf9a2e78203a" class="bulleted-list"><li style="list-style-type:circle">addressing, subnets, routers, firewalls, route tables, connectivity</li></ul><ul id="e179fa51-9325-4a40-b952-989c9ce37402" class="bulleted-list"><li style="list-style-type:circle">NAT gateway<ul id="50344ebf-ad57-472d-8974-2f43a05550fa" class="bulleted-list"><li style="list-style-type:square">provides the private subnet with private access to public endpoints on the internet</li></ul><ul id="3439b463-8dc6-428f-8af4-7301d3596826" class="bulleted-list"><li style="list-style-type:square">connections can be initiated only from the subnet (resources and the open internet cannot use the NAT gateway, or any other gateway to access resources in the private subnet - one way access) </li></ul></li></ul><ul id="39bf3ba9-e952-4e3e-9c4b-3636b6ea8751" class="bulleted-list"><li style="list-style-type:circle">service gateway<ul id="58e575b0-1aef-4ab1-94cf-f718c0a1d348" class="bulleted-list"><li style="list-style-type:square">provides the private subnet with private access to supported Oracle services within the region</li></ul></li></ul><ul id="4d091194-1532-443e-b213-ee43c8b53749" class="bulleted-list"><li style="list-style-type:circle">local peering gateway<ul id="f66c6434-0651-412f-8dd2-0fde64b9bd1f" class="bulleted-list"><li style="list-style-type:square">communicates VCNs in the same region</li></ul></li></ul><ul id="d405b45a-74e6-450f-87ab-43d25abee3e9" class="bulleted-list"><li style="list-style-type:circle">dynamic routing gateway<ul id="ac206e51-ef63-4fc1-aaee-c154dfd268d4" class="bulleted-list"><li style="list-style-type:square">connect your existing on-prem network to your VCN</li></ul><ul id="86ca2c52-d111-4758-9fce-42b09b691cea" class="bulleted-list"><li style="list-style-type:square">provides a single point of entry for remote network paths coming into VCN</li></ul></li></ul></li></ul><h1 id="4c13fafd-b329-4c7e-b71b-05898b4eb1a0" class="">CIDR</h1><ul id="2a3f3f5b-deae-4f26-b4c0-fbd47a45e05b" class="bulleted-list"><li style="list-style-type:disc">classless inter-domain <strong>routing</strong><ul id="4eb5654c-a48b-4b24-81ee-cdb4a81d6cc1" class="bulleted-list"><li style="list-style-type:circle">method for allocating IP addresses and IP routing</li></ul></li></ul><ul id="0f77d85e-4714-434b-aa11-5daf17f99629" class="bulleted-list"><li style="list-style-type:disc">virtual flat network typically /16</li></ul><ul id="84ab573c-7dce-418a-9b12-dda3f7310074" class="bulleted-list"><li style="list-style-type:disc">subnets in virtual flat network typically /24</li></ul><figure id="01f7ded5-cb06-4a63-9485-24f18a10cbe2" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled.png"><img style="width:672px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled.png"/></a></figure><ul id="489b8c54-c807-4ebe-ab87-6028279ec54d" class="bulleted-list"><li style="list-style-type:disc">network ID, first host and broadcast address are reserved</li></ul><figure id="c6c736eb-318b-4a72-8442-a2894e24062c" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%201.png"><img style="width:706px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%201.png"/></a></figure><figure id="8a6b81f9-985c-4870-be0e-924507bdb463" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%202.png"><img style="width:601px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%202.png"/></a></figure><figure id="17733b1a-6ccb-4653-9ab7-9ba0c5fd44ba" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%203.png"><img style="width:895px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%203.png"/></a></figure><h1 id="63d0d53b-8efa-43cf-8be5-014c1b1db8e7" class="">RFC 1918</h1><ul id="fee3cc90-153b-45ec-809f-bda3b5d996f0" class="bulleted-list"><li style="list-style-type:disc">networking concept, private IPv4 addresses that are recommended to apply to your VCN and subnets</li></ul><ul id="8b9e3e88-b251-47a9-a9b5-8630385e642d" class="bulleted-list"><li style="list-style-type:disc">a collection of IPv4 address ranges that should be reserved in private network<ul id="c68f9469-8de3-428a-b09b-e487b6d82f22" class="bulleted-list"><li style="list-style-type:circle">no resource in the open internet will ever have an IP address from this range publicly</li></ul></li></ul><figure id="db799cbf-a5ce-4645-b2e5-727c302f0f3b" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%204.png"><img style="width:707px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%204.png"/></a></figure><figure id="67de9afb-6fd5-41c7-bd72-c875653799a8" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%205.png"><img style="width:831px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%205.png"/></a></figure><ul id="8017356f-3909-4080-a59d-d60eb0911905" class="bulleted-list"><li style="list-style-type:disc">recommended to stick with RFC 1918 because if you use an address that had already been implemented in the internet, and you want to reach the resource from that VCN, it will not be possible (a routing conflict is created)<ul id="2e2e1123-4f5e-4df3-a3c0-9f4038200a75" class="bulleted-list"><li style="list-style-type:circle">private resources cannot be reached over the public internet directly</li></ul></li></ul><h1 id="8151d0fc-e75a-41d9-b8f2-cdf45ea6c9b3" class="">Introduction to Subnets</h1><ul id="b46acbe2-91e1-4a80-a945-60b587e29da1" class="bulleted-list"><li style="list-style-type:disc">VCN spans all 3 availability domains</li></ul><ul id="2dacd24a-ceeb-48d6-a2d3-98f366a25299" class="bulleted-list"><li style="list-style-type:disc">subnets can be either AD specific, or regional<ul id="c8ecfbcf-9dc3-496a-b970-bb7ce90c3a85" class="bulleted-list"><li style="list-style-type:circle">load balancer or VM that belongs to an AD specific subnet is AD specific</li></ul><ul id="947f9731-ad82-47ec-94f8-4a1d8b05f9cb" class="bulleted-list"><li style="list-style-type:circle">load balancer in regional subnet is not affected by one AD going down</li></ul></li></ul><ul id="2f568b01-7805-48bb-ab9b-4b9c4a56c90d" class="bulleted-list"><li style="list-style-type:disc">each subnet has a continuous range of IPv4 CIDR, and subnets cannot have overlapping CIDRs</li></ul><ul id="bb550491-4f1c-4181-aa5b-bea0692cdb94" class="bulleted-list"><li style="list-style-type:disc">a subnet can grow or shrink after creation (/24 → /25, making it smaller)<ul id="f38e4985-e7ec-434b-9e0a-6c8d35addabe" class="bulleted-list"><li style="list-style-type:circle">be careful that it is not going to overlap with something you already created</li></ul></li></ul><ul id="004a7cff-7175-447a-aaca-9edd3c1cfdfc" class="bulleted-list"><li style="list-style-type:disc">instances you place in a subnet gets its private IP from that subnet</li></ul><ul id="e8200518-4c89-40b7-acad-2dc69ea7ac03" class="bulleted-list"><li style="list-style-type:disc">the virtual network interface card (VNIC) determines how resources can connect with the endpoints of other resources inside or outside the VCN<ul id="f2cccdeb-ca4f-45fc-8e0f-15e9ece4a955" class="bulleted-list"><li style="list-style-type:circle">you still need to establish perms on security list / network security group though</li></ul></li></ul><ul id="f05a75b9-c94a-4165-9405-9a385cf5f1bc" class="bulleted-list"><li style="list-style-type:disc">can be private or public<ul id="160c8e56-766b-4047-a337-3b04a2db1b89" class="bulleted-list"><li style="list-style-type:circle">private subnets<ul id="ba6469d9-0b8a-4f89-b36c-9e508a67bc10" class="bulleted-list"><li style="list-style-type:square">resource can only have private IPs</li></ul></li></ul><ul id="4f0fda09-a17d-4be5-9956-df1356fe23de" class="bulleted-list"><li style="list-style-type:circle">public subnets<ul id="54637055-d3ff-4339-9a6d-fa8af6dd0acd" class="bulleted-list"><li style="list-style-type:square">public IP is optional</li></ul></li></ul></li></ul><h1 id="45395dc1-9674-4e78-a085-3fbd335e7db0" class="">Security Lists</h1><ul id="a1f205bb-8f00-49f5-88d2-9bb4d5a1fd08" class="bulleted-list"><li style="list-style-type:disc">a common set of firewall rules associated with a subnet and applied to instances launched inside the subnet<ul id="108a0e82-ea9f-4a83-ac51-7f62309e38bb" class="bulleted-list"><li style="list-style-type:circle">these rules specify the type of traffic allowed in and out of the subnet (ingress/egress)</li></ul></li></ul><ul id="3c646286-3d78-41c1-8fd4-fba726166238" class="bulleted-list"><li style="list-style-type:disc">you can use default security list or create your own to bypass it</li></ul><ul id="5eaf48eb-2a3c-4398-8b4c-6470e9a93191" class="bulleted-list"><li style="list-style-type:disc">rules can be stateful or stateless<ul id="5b09514b-863a-4877-9c4d-584623030151" class="bulleted-list"><li style="list-style-type:circle">stateful - only need to configure one of the directions, either ingress or egress<ul id="78347b59-18a6-49a8-b34f-636fcf0ea2b3" class="bulleted-list"><li style="list-style-type:square">if you allow permission into port 80, you don’t need to define out of port 80, where it’s going to (response traffic automatically allowed)</li></ul><ul id="f34a10b7-62a5-4eb4-9b15-c44eef84f8b5" class="bulleted-list"><li style="list-style-type:square">default security list rules are stateful</li></ul><figure id="3eaa0239-febe-479d-8786-c4464829c545" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%206.png"><img style="width:706px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%206.png"/></a></figure></li></ul><ul id="a97ab310-35cf-4c1d-ae37-7d77bca8ef97" class="bulleted-list"><li style="list-style-type:circle">stateless - requires creation of stateless egress rule to allow automatic response traffic (you need to configure both directions)<ul id="a5131b8b-46be-461f-85d7-d6898fc6fd16" class="bulleted-list"><li style="list-style-type:square">ideal for scenarios with a large number of connections</li></ul><figure id="e90b4f46-4410-4049-84d4-b1f889efd5e4" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%207.png"><img style="width:703px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%207.png"/></a></figure></li></ul><ul id="e157987e-6072-46e6-8ad8-9fb73a6ae674" class="bulleted-list"><li style="list-style-type:circle">special cases like ICMP protocols that require an egress rule regardless of state option (otherwise ICMP will not work)</li></ul><figure id="c2c2035c-0553-459b-8764-8b8030bdf8df" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%208.png"><img style="width:612px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%208.png"/></a></figure></li></ul><ul id="59650a6b-bd64-48f0-b988-73a79d489bf2" class="bulleted-list"><li style="list-style-type:disc">is enforced at the VNIC level , VNIC is the one attaching to the subnet</li></ul><ul id="dad76310-9e2e-402d-a77d-32081b256d8f" class="bulleted-list"><li style="list-style-type:disc">each subnet can have up to five security lists<ul id="36e28a4b-a710-4c4b-a9b0-e496cf1c8c15" class="bulleted-list"><li style="list-style-type:circle">default security list has three rules <ul id="e36bc432-48d5-474f-bb6d-87f170d8d2a0" class="bulleted-list"><li style="list-style-type:square">SSH enabled for port 0, anyone can access port 22, SSH</li></ul><ul id="4a2b68eb-1f43-4611-8a4a-e740856c6a78" class="bulleted-list"><li style="list-style-type:square">two ICMP rules for troubleshooting (not echo, not pinging)</li></ul><figure id="57de76ac-94fc-49df-a76a-8fad6de4e911" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%209.png"><img style="width:1312px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%209.png"/></a></figure></li></ul><ul id="a3d3f7b6-686b-49df-bb4a-4d30161cb6e2" class="bulleted-list"><li style="list-style-type:circle">manually enable IPv6 traffic, or any other services</li></ul></li></ul><h1 id="0f36d311-aa91-4c6b-8145-20eeb932226c" class="">Network Security Groups</h1><ul id="0be9298b-37a0-496a-b7da-bfffb482bb34" class="bulleted-list"><li style="list-style-type:disc">unlike security lists, they are not created by default</li></ul><ul id="acd1f41c-7a8d-4240-b266-47fe361be9fa" class="bulleted-list"><li style="list-style-type:disc">update NSG through attached VNICs panel</li></ul><ul id="40d49e4a-06da-4cbd-9193-5bc756c4fa83" class="bulleted-list"><li style="list-style-type:disc">provides a virtual firewall for a set of cloud resources that all have the same security posture, <strong>BUT </strong>consists of rules that apply <strong>only </strong>to set of VNICs of your choice in a single VCN (unlike security lists)</li></ul><ul id="914de339-8697-4747-871d-2748db0c8a1e" class="bulleted-list"><li style="list-style-type:disc">in fact, Oracle recommends NSG over SLs</li></ul><ul id="5445e482-fa03-48e3-a13b-6579529e8a63" class="bulleted-list"><li style="list-style-type:disc">you can use a NSG to create exceptions to a SL</li></ul><ul id="85ff608a-ebdb-4c6c-836a-40bf111db200" class="bulleted-list"><li style="list-style-type:disc">when you create a subnet, you NEED to add it to a security list, but the security list can be empty<ul id="e9477d11-92fc-49a6-a286-4280b539160d" class="bulleted-list"><li style="list-style-type:circle">you can use SLs or NSGs by themselves or together</li></ul></li></ul><ul id="fb40af9f-d0cf-4c28-a2d0-68e09549dae3" class="bulleted-list"><li style="list-style-type:disc">NSGs have stateful and stateless statuses as well<ul id="9d733612-3cef-44ea-b6ae-19313d06579d" class="bulleted-list"><li style="list-style-type:circle">you can create a stateless rule in the SL, then have the matching stateless rule in the NSG!</li></ul></li></ul><h1 id="92fad72b-ca4c-4f1a-ae3f-4c2a4ac5f0a2" class="">Bastion</h1><ul id="c69cc15e-9d62-4b36-bb74-d421824b702c" class="bulleted-list"><li style="list-style-type:disc">bastion as a service</li></ul><ul id="f233e917-55bd-41c2-abe4-3137aef4f3b4" class="bulleted-list"><li style="list-style-type:disc">if you need to connect resources from the open internet (resides in a private subnet), you can use:<ul id="1bf22c51-8faa-4c8f-b06c-80fe7e45bc74" class="bulleted-list"><li style="list-style-type:circle">a bastion server that you create on a compute instance (serves like a jump box from a public subnet into resources in your private subnet) — not optimal<ul id="d23e465d-1811-4fea-b270-44d21caa62a8" class="bulleted-list"><li style="list-style-type:square">you need to create a compute instance</li></ul><ul id="27ac5822-3893-4f4a-ba97-db6204eabdf1" class="bulleted-list"><li style="list-style-type:square">it presents danger of being accessed from an external entity</li></ul></li></ul><ul id="28c73282-8dea-4cad-9573-4ffae5042afa" class="bulleted-list"><li style="list-style-type:circle">Oracle’s bastion service</li></ul></li></ul><h2 id="b65657ff-d5b1-4e11-963d-096a0ef1734a" class="">What is the OCI Bastion Service?</h2><ul id="90764f5c-1c66-490a-90ef-c34eded3a7ba" class="bulleted-list"><li style="list-style-type:disc">a service that provides ephemeral access (resources are not always available) into your resources</li></ul><ul id="91807f20-1a68-4a4e-9f7b-5c67046cb15e" class="bulleted-list"><li style="list-style-type:disc">customers access target resources via OCI bastion in a secure and time-bound manner<ul id="91f41a5b-8be8-487c-8dba-b0b8c91cde9c" class="bulleted-list"><li style="list-style-type:circle">incoming SSH connections can be restricted to certain IPv4 address ranges or even a specific IP</li></ul></li></ul><ul id="2fd39013-544c-477b-b562-0268bfa27743" class="bulleted-list"><li style="list-style-type:disc">everything is recorded through the Event and Audit service</li></ul><ul id="3c6cd608-0977-438e-9bdb-358f3801698a" class="bulleted-list"><li style="list-style-type:disc">OCI bastion service is integrated with IAM (you can grant permissions for those users accessing your resources in a private subnet)</li></ul><ul id="09b87caf-84db-495d-9f7e-b1d83d60d7ca" class="bulleted-list"><li style="list-style-type:disc">it is FREE (bastion service, not bastion server since you have to pay for that compute instance)</li></ul><h2 id="41b7aa9c-9e9c-40a0-b7ea-24990eecf8f2" class="">What can I access with OCI Bastion Service?</h2><ul id="250e7d8a-5e68-4963-a9a1-1623c67e1fd7" class="bulleted-list"><li style="list-style-type:disc">OCI Bastion is built on to pf OpenSSH/SSH<ul id="d6e3bda9-09b6-4d1f-acc0-8e004d3ec86c" class="bulleted-list"><li style="list-style-type:circle">anything that works over SSH can work via OCI Bastion</li></ul></li></ul><figure id="fbe05cc7-3306-471b-8ff6-3e9574a31df5" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2010.png"><img style="width:492px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2010.png"/></a></figure><h2 id="dacd104e-4496-40f6-9c4e-1271f4e8ed18" class="">Bastion Works with Different Networking Architectures</h2><ul id="3ad09cf1-4d1c-4f59-afd7-507c1fc30b8b" class="bulleted-list"><li style="list-style-type:disc">you can put bastion service in same subnet or in a different subnet<ul id="df5faab9-4194-4b98-833e-1758d548e337" class="bulleted-list"><li style="list-style-type:circle">in a bastion-only private subnet</li></ul><ul id="9ac4e8e2-1a5c-45b3-8c3a-6027fbadc02a" class="bulleted-list"><li style="list-style-type:circle">or in same subnet where your resources reside</li></ul><figure id="4848df1b-bfcf-46be-9787-0ee22b0d655e" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2011.png"><img style="width:669px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2011.png"/></a></figure></li></ul><h1 id="498c08ea-cac7-42ae-83f5-eff44d8b8c4e" class="">Internet Gateway</h1><ul id="3767a987-22f6-40ba-9f7b-8141bef64102" class="bulleted-list"><li style="list-style-type:disc">OPTIONAL virtual router that connects the VCN with the internet<ul id="4ec26ffe-0991-43c0-9b8b-1113214e5536" class="bulleted-list"><li style="list-style-type:circle">allows connectivity into the open internet</li></ul></li></ul><ul id="204d14f4-a5a2-4bb3-8234-325ec4c7fec9" class="bulleted-list"><li style="list-style-type:disc">egress and ingress connections from the VCN or to the VCN (you need a public IP on both ends, obviously!)<ul id="8e6b52c8-377b-421d-874e-3fad02875543" class="bulleted-list"><li style="list-style-type:circle">hence, resources that use it need to be in a public subnet and have a public IP</li></ul></li></ul><ul id="f9091ef3-722e-412a-afea-44d7dd3671c9" class="bulleted-list"><li style="list-style-type:disc">for the gateway to work, you also need a route rule in a route table, with the appropriate permissions for the connection to establish (SL or NSG)</li></ul><ul id="808c2b28-6d06-4740-8eae-99e2d6eb8711" class="bulleted-list"><li style="list-style-type:disc">the IG can only be used by resources in the VCN<ul id="361c56cd-2b90-4467-9016-f571b33d0108" class="bulleted-list"><li style="list-style-type:circle"><strong>NOT </strong>by another locally peered VCN </li></ul><ul id="0091ee30-2411-4707-8363-41357a3bf8fa" class="bulleted-list"><li style="list-style-type:circle"><strong>NOT </strong>by another resource connected to your VCN from an on-prem DRG</li></ul><ul id="d126ad52-96c7-45cc-a8eb-ee3ebb2b1b58" class="bulleted-list"><li style="list-style-type:circle">cannot have a transit routing</li></ul><ul id="93d7fcd5-8d8c-448c-b6e9-99a041bd1be7" class="bulleted-list"><li style="list-style-type:circle">needs to be a resource in the same subnet!</li></ul></li></ul><ul id="78e6d71b-2090-4a96-bc70-0da362eeaf4d" class="bulleted-list"><li style="list-style-type:disc">one IG per VCN only</li></ul><h1 id="49cb6b17-69b4-4fbf-8c75-46635a02f250" class="">NAT Gateway</h1><ul id="5704ae62-41a4-4145-af89-07a5c064f768" class="bulleted-list"><li style="list-style-type:disc">network address translation gateway</li></ul><ul id="13e4ef91-e09f-4cf7-b3b3-4352e1ffd7ed" class="bulleted-list"><li style="list-style-type:disc">networking technique to give an entire private network or private subnet (without assigning each of the hosts a public IP)</li></ul><ul id="e5c3ff01-7f48-470e-9c15-8fc49a6e3395" class="bulleted-list"><li style="list-style-type:disc">host can initiate connections to the internet and receive replies, but cannot receive inbound connections initiated from the internet</li></ul><ul id="86f13d76-7976-4a23-9c8a-e4bd8524a198" class="bulleted-list"><li style="list-style-type:disc">NAT gateways are highly available and support TCP, UDP and ICMP ping traffic</li></ul><ul id="b4b2d133-683a-4bc9-9e1b-edba6647291a" class="bulleted-list"><li style="list-style-type:disc">there is a limit on the amount of NAT gateways you can have in a VCN (it is typically one)<ul id="069309d1-4d7d-4e60-b6f8-6f22eb70e400" class="bulleted-list"><li style="list-style-type:circle">max amount of concurrent connections to a single destination address is 20,000 (the 20,001th connection will need a second NAT gateway)</li></ul><ul id="c46f757d-cb23-4a0a-95b7-a16a9b27de3e" class="bulleted-list"><li style="list-style-type:circle">you can have up to 64 private IP addresses</li></ul></li></ul><ul id="ade66f94-341c-4ff2-ac91-786a0e7d0dca" class="bulleted-list"><li style="list-style-type:disc">similar to an IG, the NAT gateway can only be used by resources inside the VCN (peering into a VCN and DRG not supported)</li></ul><h1 id="fe2add92-6542-4e72-b281-38ff2e617563" class="">Service Gateway</h1><ul id="50c8c795-2c57-47dc-bc8c-5f03bc9a2ccb" class="bulleted-list"><li style="list-style-type:disc">just like IG and NAT gateway, service gateway can be created internally, from the VCN</li></ul><ul id="4eb96294-a3a1-4b51-96a9-1690b701b446" class="bulleted-list"><li style="list-style-type:disc">service gateway provides a secure path to the Oracle services network without leaving OCI (services like OSS and ADW)<ul id="7c128ddb-6651-4298-a1bf-5a0398cbf76d" class="bulleted-list"><li style="list-style-type:circle">these services usually have a public IP and are accessed through the open internet</li></ul></li></ul><ul id="618bc3e6-8300-4ba8-8aab-d12ba92f1c4d" class="bulleted-list"><li style="list-style-type:disc">service gateway will grant access to Oracle service network through either FastConnect, or through your site-to-site VPN (unlike IG and NAT gateway whcih are only available to resources in VCN)<ul id="41f59d79-eb8b-4646-af5e-6f622bbde391" class="bulleted-list"><li style="list-style-type:circle">this means that your on-prem network can leverage FastConnect to reach the Oracle services network as well<ul id="15f6806c-92fc-40c8-a3ba-b15777907544" class="bulleted-list"><li style="list-style-type:square">FastConnect has predictable latency, predictable bandwidth (unlike open internet)</li></ul></li></ul></li></ul><ul id="639b4e29-4f1a-4663-8bca-4f81f1383e17" class="bulleted-list"><li style="list-style-type:disc">service gateway is <strong>regional </strong>(enables access to your VCN’s region only)</li></ul><h1 id="46ea0322-7ba2-4b18-8cfb-f61ad6af4573" class="">Local Peering Gateway</h1><ul id="80bd4cb3-379c-447b-8cfe-9a3475778ed7" class="bulleted-list"><li style="list-style-type:disc">process of connecting two virtual networks that are in the same region<ul id="62ce692e-4dd3-4ea3-be10-05d392896d7c" class="bulleted-list"><li style="list-style-type:circle">so their resources can communicate with each other using their private IP addresses without routing the traffic over the internet or through on-prem network</li></ul></li></ul><ul id="73eb939a-0062-4a4c-a147-7c3acf296229" class="bulleted-list"><li style="list-style-type:disc">a typical local peering includes:<ul id="cfad8573-cc1a-4ec4-bf43-18d0b9ac69df" class="bulleted-list"><li style="list-style-type:circle">two VCNs with non-overlapping CIDRs in the same region</li></ul><ul id="9af8fb37-85b6-401d-8f14-8097a11f67f0" class="bulleted-list"><li style="list-style-type:circle">a local peering gateway (LPG) on each VCN in the peering relationship</li></ul><ul id="07012e7a-e03a-4dc2-8ff9-8c960cf72202" class="bulleted-list"><li style="list-style-type:circle">a connection between these two LPGs</li></ul><ul id="bf2556cf-1536-4cbe-95ed-a16033acd734" class="bulleted-list"><li style="list-style-type:circle">supporting route rules to enable traffic to flow over the connection and only to and from select subnets in the respective VCNs (if desired)</li></ul><ul id="0493c043-a0e1-4b54-919a-a951d1ced367" class="bulleted-list"><li style="list-style-type:circle">supporting security rules to control the types of traffic allowed to and from the instances in the subnets</li></ul></li></ul><ul id="9bc79fb2-d37b-4a22-bdce-08e28ca8e91d" class="bulleted-list"><li style="list-style-type:disc">DRG v2 allows two VCNs to communicate with each other through the DRG remote peering connection</li></ul><ul id="deda818b-0539-4e56-86f5-83626fecc58e" class="bulleted-list"><li style="list-style-type:disc">DRG connection vs local peering connection</li></ul><table id="4026b3b5-47a3-4ce3-8c94-64c78553c3bf" class="simple-table"><thead class="simple-table-header"><tr id="b4006515-f6ed-4119-9c1d-485679f9849f"><th id="cfAP" class="simple-table-header-color simple-table-header" style="width:241.8333282470703px">DRG</th><th id="\p\h" class="simple-table-header-color simple-table-header" style="width:242px">LPC</th></tr></thead><tbody><tr id="f080aeb7-c6b4-41da-9de4-685a18e10b84"><td id="cfAP" class="" style="width:241.8333282470703px">if you have an overlapping CIDR, you can add another CIDR (non-overlapping) to route to the other connection</td><td id="\p\h" class="" style="width:242px">cannot have overlapping CIDR</td></tr><tr id="7033121c-e702-497c-8f62-6fdad29cdedb"><td id="cfAP" class="" style="width:241.8333282470703px">more complicated construct → higher latency</td><td id="\p\h" class="" style="width:242px">less complicated than DRG → lower latency</td></tr></tbody></table><figure id="561cb2df-ed84-4165-86b5-c67d27b12454" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2012.png"><img style="width:576px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2012.png"/></a></figure><ul id="179a4fa3-0dc0-4c84-92cb-27ef6d7c2e27" class="bulleted-list"><li style="list-style-type:disc">there is another way to connect two VCNs (via a DRG attachement)<ul id="081432b5-f08f-47a8-915c-8e3044202dc9" class="bulleted-list"><li style="list-style-type:circle">you have a DRG in the middle</li></ul><ul id="8f6baebf-8c19-4f0e-abc7-c6eba50d37c8" class="bulleted-list"><li style="list-style-type:circle">two VCNs are attached to the same DRG with the corresponding DRG as the next hop (traffic will be pushed to the other VCN because of this)</li></ul></li></ul><figure id="506da6ee-fe4b-4b98-9a0d-0198754b5560" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2013.png"><img style="width:288px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2013.png"/></a></figure><h1 id="f26d57fc-a20d-42ad-b4e7-478dff772891" class="">Route Tables</h1><ul id="7b5fea77-b751-4103-910f-c4f4a0202df4" class="bulleted-list"><li style="list-style-type:disc">you can use/edit the default route table or create a new one to supplement the VCN<ul id="c86d2be9-5112-4198-970a-49feffaf7d41" class="bulleted-list"><li style="list-style-type:circle">new route table for private subnet, while public subnet uses default route table</li></ul></li></ul><ul id="5d388f42-d38e-4928-87cb-0d9112a9d8ec" class="bulleted-list"><li style="list-style-type:disc">traffic within VCN does not require route table, it is automatically handled by VCN local routing<ul id="eaa215c8-4c03-4d47-b9bb-bfd995a219b3" class="bulleted-list"><li style="list-style-type:circle">no route rules are required to enable routing</li></ul><ul id="9bf88991-56d4-46d8-93ed-342c651ce068" class="bulleted-list"><li style="list-style-type:circle">however, you still need permission to access those resources! (for eg. a compute node still needs permission to reach a database)</li></ul></li></ul><ul id="bc3f2b0c-495d-4e19-95ee-ab31dc9b6ece" class="bulleted-list"><li style="list-style-type:disc">if there are overlapping rules in a route table, the most specific rule is used</li></ul><ul id="e5661e4f-7b02-4a9e-81c4-755d0a7ba090" class="bulleted-list"><li style="list-style-type:disc">logically, if there is no matching rule, the packet is dropped</li></ul><ul id="1b703394-33cf-44f6-9eb9-b9efbf06049a" class="bulleted-list"><li style="list-style-type:disc">IPv6 addressing is supported for all commercial and government regions </li></ul><ul id="9c01275e-9018-47c7-ac8e-ae88b9a3f78c" class="bulleted-list"><li style="list-style-type:disc">each route rule has a destination CIDR block and a route target for traffic that matches that CIDR<ul id="709a4d30-dfab-4343-939a-df2d674c52d9" class="bulleted-list"><li style="list-style-type:circle">exception for the service gateway (route target), you can define ‘object storage’(destination CIDR)</li></ul><figure id="f7ada943-6ced-4595-844a-f5ec77bcdb9b" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2014.png"><img style="width:308px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2014.png"/></a></figure></li></ul><h1 id="a89ce2d8-9552-4376-870d-52e4f15de95c" class="">Skill Check</h1><figure id="a9b86c7e-1fe7-4ac4-9431-56f1d039eabd" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2015.png"><img style="width:958px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2015.png"/></a></figure><figure id="696a4b5d-932d-4440-8efd-9a404b01f2d8" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2016.png"><img style="width:1080px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2016.png"/></a></figure><figure id="0d4223c7-8317-44d1-82b4-0eef5e0fd9fa" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2017.png"><img style="width:968px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2017.png"/></a></figure><figure id="98082e89-3303-49e8-8269-b9745697d4bf" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2018.png"><img style="width:961px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2018.png"/></a></figure><figure id="fc71dcf9-a5e2-44f5-8dd9-97663aa32f5b" class="image"><a href="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2019.png"><img style="width:1144px" src="Networking%20-%20Virtual%20Cloud%20Network%20c4a9acfac4744e3684ba5d1d3eaab0d9/Untitled%2019.png"/></a></figure></div></article></body></html>
