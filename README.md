@@ -1,4 +1,5 @@
-# oracle cloud infrastructure
+
+# 🚀 oracle cloud infrastructure 🚀
 this repo contains my notion notes for the various certifications i took during my oracle internship from 2022-2023
 #### contents
 - oci data science
@@ -7,8 +8,7 @@ this repo contains my notion notes for the various certifications i took during 
 - oci architect
 - oci fundamentals
 #
-_just for keepsake but enjoy i guess_
-
+_just for keepsake but enjoy i guess_ [🔗](http://holsoma.github.io/oci-notes)
 
 
 
