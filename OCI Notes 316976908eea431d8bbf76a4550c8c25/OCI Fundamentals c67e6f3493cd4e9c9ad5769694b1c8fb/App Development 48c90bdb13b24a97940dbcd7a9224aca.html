@@ -1,0 +1,694 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>App Development</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="48c90bdb-13b2-4a97-940d-bcd7a9224aca" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">9️⃣</span></div><h1 class="page-title">App Development</h1><p class="page-description"></p></header><div class="page-body"><ul id="65fc35d3-c72f-497b-a1ed-a865930f9a9a" class="bulleted-list"><li style="list-style-type:disc">cloud-native vs cloud-enabled vs cloud-based application</li></ul><ul id="5266d54e-ca49-426e-bfb0-288b0a57ea2b" class="bulleted-list"><li style="list-style-type:disc">cloud native<ul id="264357cd-459a-4090-9499-17a3a5522bde" class="bulleted-list"><li style="list-style-type:circle">constructed on the cloud from scratch</li></ul><ul id="19fb09f0-ea79-4702-a295-db0355c1e517" class="bulleted-list"><li style="list-style-type:circle">harness the power of public cloud platforms (elasticity, scalability, resiliency, flexibility)</li></ul></li></ul><ul id="058c1116-4656-4ae9-ae2e-3e1ac517c383" class="bulleted-list"><li style="list-style-type:disc">cloud enabled<ul id="7db9be17-a92a-48a0-a072-7c0b03853735" class="bulleted-list"><li style="list-style-type:circle">application that has been moved to the cloud, but originally developed for use in an on-premises environment (typically legacy applications)</li></ul></li></ul><ul id="1d28a498-8eb1-459c-a97c-5dbb5e297118" class="bulleted-list"><li style="list-style-type:disc">cloud based<ul id="64b90bd4-0673-4888-9c8b-daf9d32d3363" class="bulleted-list"><li style="list-style-type:circle">middle ground between cloud native and cloud enabled</li></ul></li></ul><ul id="dad99ff9-0b5f-4ba4-8f41-2921e315761f" class="bulleted-list"><li style="list-style-type:disc">cloud-native app building blocks<ul id="9302e306-1051-4fd0-9189-a921ba69c42a" class="bulleted-list"><li style="list-style-type:circle">containers<ul id="271a8048-c8c1-4754-941d-21a1b6484803" class="bulleted-list"><li style="list-style-type:square">packing your application code into one single executable unit</li></ul><ul id="a57f577d-7f8d-44fc-8b0f-0643eb92653a" class="bulleted-list"><li style="list-style-type:square">portable</li></ul></li></ul><ul id="64676334-a278-4f36-b6f8-c8e47998513e" class="bulleted-list"><li style="list-style-type:circle">microservices<ul id="029c606f-f1a9-4d48-a144-33f9e30aeb06" class="bulleted-list"><li style="list-style-type:square">split app feature or tasks into independent, loosely coupled services</li></ul><ul id="dd9d1de2-3243-4aaa-bbee-819e926f91cc" class="bulleted-list"><li style="list-style-type:square">allows you to design each service with a limited functional scope that focuses on one feature or capability</li></ul><ul id="99b48bf5-3375-4c8a-bac4-174553347cd1" class="bulleted-list"><li style="list-style-type:square">this improves app maintenance, feature development, testing, deployment, scalability</li></ul></li></ul><ul id="a6225212-af32-4d73-8057-99e72ee135ad" class="bulleted-list"><li style="list-style-type:circle">service meshes</li></ul><ul id="37866c83-7ba6-447c-aa75-861f0f3e223c" class="bulleted-list"><li style="list-style-type:circle">immutable infrastructure</li></ul><ul id="8341ed82-c81d-47b1-9430-f215ed7f776d" class="bulleted-list"><li style="list-style-type:circle">APIs</li></ul><ul id="f0a7849d-6406-42e2-b406-8e955ece399c" class="bulleted-list"><li style="list-style-type:circle">all these services create loosely coupled systems that are resilient, manageable, and observable, they allow developers to make high-impact changes frequently and with minimal effort</li></ul><ul id="49a2a25d-5cb1-40c9-8feb-d1c2926da6b3" class="bulleted-list"><li style="list-style-type:circle">there is a 12-factor app methodology that details how modern, cloud-native apps should be built</li></ul></li></ul><ul id="f76375af-a5c2-4865-bbdb-c5732032e284" class="bulleted-list"><li style="list-style-type:disc">OCI developer services (this will help when you build cloud-native apps)<ul id="78c5ee67-cd68-48c7-9890-f86323e40e30" class="bulleted-list"><li style="list-style-type:circle">container and artifacts<ul id="c49f3f25-8a8a-4969-b0fd-dc2a21d3e81c" class="bulleted-list"><li style="list-style-type:square">managing containerized applications, associated resources and deployments</li></ul><ul id="72427343-62e5-46cd-afcf-544444d6841a" class="bulleted-list"><li style="list-style-type:square">OKE kubernetes service</li></ul><ul id="3e071367-b3c6-4778-9060-6aa9cf4a09e6" class="bulleted-list"><li style="list-style-type:square">container registry</li></ul><ul id="b8720a31-ee06-49e7-ae5a-9ad4851fe4aa" class="bulleted-list"><li style="list-style-type:square">artifact registry</li></ul><ul id="7571104f-51e7-4012-92c5-e6f01732e72f" class="bulleted-list"><li style="list-style-type:square">service mesh service</li></ul></li></ul><ul id="8e2b2f03-1432-4ccc-854c-54b4e98f3d1a" class="bulleted-list"><li style="list-style-type:circle">functions<ul id="e17b7e18-761b-4ce3-95ff-fda63d340ec7" class="bulleted-list"><li style="list-style-type:square">managed severless offering</li></ul></li></ul><ul id="eeca96a0-bcf5-4775-bc5c-c36e1a28bb3a" class="bulleted-list"><li style="list-style-type:circle">API management<ul id="61ddf782-4167-4700-8114-1e9709bf4cb3" class="bulleted-list"><li style="list-style-type:square">lets you define REST interfaces for other services</li></ul><ul id="dc83828d-b824-4d42-bfc6-ffa7fe153fb1" class="bulleted-list"><li style="list-style-type:square">microservices you create can call each other and leverage this managed service</li></ul></li></ul><ul id="2b21360a-300b-4df8-b311-631a9fc738c5" class="bulleted-list"><li style="list-style-type:circle">DevOps<ul id="bd77c7b6-5aac-4e07-ab1d-cfb0465468e3" class="bulleted-list"><li style="list-style-type:square">visually script CI/CD</li></ul></li></ul><ul id="b4f11a03-5e17-46fa-ace7-c808ad88bf6f" class="bulleted-list"><li style="list-style-type:circle">resource manager<ul id="f610d355-aa33-42b7-a8e8-0b16ab6409de" class="bulleted-list"><li style="list-style-type:square">service to deploy infrastructure as code with managed Terraform templates</li></ul></li></ul><ul id="353fe2f3-3ec4-4c21-8bc5-23fc822c3099" class="bulleted-list"><li style="list-style-type:circle">developer resources<ul id="e2d59883-c363-4433-929f-50f93eb61388" class="bulleted-list"><li style="list-style-type:square">tools for writing apps that leverage OCI directly (terraform, ansible, powershell support, cli, etc.)</li></ul><p id="00235c1e-113b-45f1-993d-7c28c2a06a25" class="">
+</p></li></ul></li></ul><p id="841faaae-5539-429a-83bb-63bc4bfab659" class=""><strong>Oracle Container Engine for Kubernetes (OKE)</strong></p><ul id="5e94347f-c3e8-4430-9472-d70c3a02514f" class="bulleted-list"><li style="list-style-type:disc">VMs vs Containers<ul id="c32f56b0-f500-4dde-bcd4-09fd22d16f90" class="bulleted-list"><li style="list-style-type:circle">VMs have a hypervisor (virtual machine monitor) like an ESXI and VMs running on top of the hypervisor, each VM has its own OS inside it, then the libraries and the dependencies and the application</li></ul><ul id="44649fd4-9822-4601-8fec-fdb6d0a5e601" class="bulleted-list"><li style="list-style-type:circle">Containers have the underlying hardware (the same as VMs), then the OS, then container runtime (like Docker) installed on the OS</li></ul><ul id="9b19bf9e-db28-4547-a9ee-c213fdbedf0e" class="bulleted-list"><li style="list-style-type:circle">the container runtime manages the containers that run with the application, libraries and dependencies, but there is no OS inside the containers</li></ul></li></ul><ul id="48229944-5286-45b9-970d-2c9a16a096f8" class="bulleted-list"><li style="list-style-type:disc">why containers over VMs?<ul id="0d7a2b59-687f-4803-8297-5a1367655f75" class="bulleted-list"><li style="list-style-type:circle">VMs have an extra overhead, since there are multiple VMs running, multiple OS systems running, each with their own kernels, etc. -&gt; higher utilization</li></ul><ul id="ea7c749f-4ca9-4484-9b14-47857f767ddb" class="bulleted-list"><li style="list-style-type:circle">VMs also use more disk space since</li></ul><ul id="fa709627-b36f-4bc8-94b8-014c3c98f7ff" class="bulleted-list"><li style="list-style-type:circle">VMs take longer to boot up because each OS has to boot up</li></ul><ul id="ea3aa741-44f8-4ec6-b31a-f65eee621e6e" class="bulleted-list"><li style="list-style-type:circle">Containers boot up in a matter of seconds, they are lightweight (usually MBs in size, but that&#x27;s because the OS is heavy), this means smaller images as well</li></ul><ul id="7863211d-d87c-4f18-a625-ed60a925cfc9" class="bulleted-list"><li style="list-style-type:circle">Containers are portable, build file that goes with your image, you can deploy it anywhere (hence more suitable for cloud-native application&#x27;s microservices!)</li></ul></li></ul><ul id="55b7d3e5-86c6-44b3-9407-2ece7fb928ea" class="bulleted-list"><li style="list-style-type:disc">Kubernetes<ul id="ae33afd4-de3f-4570-9c87-e5b1c5941ab5" class="bulleted-list"><li style="list-style-type:circle">containers need to talk to each other (to scale up or down, etc.)</li></ul><ul id="1e6f635b-8b5b-4354-90f2-e3da533ec4a9" class="bulleted-list"><li style="list-style-type:circle">this connectivity is known as container orchestration, and Kubernetes is an open source system for automating, deployment, scaling and management of containerized applications</li></ul></li></ul><ul id="9ec26854-0c85-4c92-829b-d85f007d6930" class="bulleted-list"><li style="list-style-type:disc">advantages of Kubernetes<ul id="64f087b3-96b6-42f3-a72b-7677b4f90083" class="bulleted-list"><li style="list-style-type:circle">run containerized applications of any scale with no downtime</li></ul><ul id="79cba2f3-d509-4eb4-9b5a-4ad79128bd6b" class="bulleted-list"><li style="list-style-type:circle">self-heal containerized application -&gt; provides resiliency</li></ul><ul id="70c69675-88af-4f1b-be58-a1fdfd2db153" class="bulleted-list"><li style="list-style-type:circle">auto-scale containerized applications -&gt; ensure optimal utilization</li></ul><ul id="e280fec9-70a3-459f-990c-075ff2ecc2d2" class="bulleted-list"><li style="list-style-type:circle">all these simplifies deployment operations greatly</li></ul></li></ul><ul id="9b5e4747-af2c-478f-96e4-11938b00a16c" class="bulleted-list"><li style="list-style-type:disc">what is Oracle Container Engine for Kubernetes (OKE)?<ul id="f6c494e9-ede5-434b-a903-bcac2881c515" class="bulleted-list"><li style="list-style-type:circle">fully managed, scalable, and highly available kubernetes system with many features for developers (like one click cluster creation), CLI/API support</li></ul><ul id="20496afc-ef61-43e8-809c-6a76526e472f" class="bulleted-list"><li style="list-style-type:circle">support for running these on ARM based and GPU based instances</li></ul><ul id="a6a7d586-8cf6-4132-811f-06060968f642" class="bulleted-list"><li style="list-style-type:circle">DevOps advantages like auto-scaling support</li></ul><ul id="cd240dd3-1da0-4c39-95e4-41bf377dfbc2" class="bulleted-list"><li style="list-style-type:circle">automatic kubernetes cluster upgrades</li></ul><ul id="38e3a67f-b1ae-4ada-85b3-081bbf2088c2" class="bulleted-list"><li style="list-style-type:circle">self-healing cluster nodes</li></ul></li></ul><ul id="1803728e-7c60-4eda-ae6e-3cc47f75c905" class="bulleted-list"><li style="list-style-type:disc">how does OKE work?<ul id="71e92a34-4962-4fd6-9325-c1e23499c9ca" class="bulleted-list"><li style="list-style-type:circle">a node pool which consists of nodes (a machine which kubernetes is installed) which consists of pods (a group of one or more containers with shared storage and network resources, a specification file for how to run containers inside the pod AKA smallest unit of compute in a managed kubernetes environment)</li></ul><ul id="8dcb8819-10f9-4b7f-ac99-2fc8b25fdd6e" class="bulleted-list"><li style="list-style-type:circle">one highly available control plane nodes manage the worker nodes/node pools and pods in the cluster</li></ul><ul id="c4848c13-c5f7-4947-bbf7-fa15cbe7d505" class="bulleted-list"><li style="list-style-type:circle">you don&#x27;t have to pay for control plane nodes<ul id="31eedbbf-4877-4832-a8e2-f3259926abbf" class="bulleted-list"><li style="list-style-type:square">oracle manages control plane nodes, which have different components (kube-controller manager, cloud-controller manager, kube-API server, kube-scheduler, and etcd[key-value store used for kubernetes to back cluster data])</li></ul><ul id="58fc9fc7-fadc-4a72-b182-77188c484fe2" class="bulleted-list"><li style="list-style-type:square">these components make decisions about the cluster (how to schedule containers, detection and response to cluster events: scale up, scale down, node failure)</li></ul><p id="bb11495e-bf99-4988-9c52-749fd7fa85b9" class="">
+</p></li></ul></li></ul><p id="a2f01e1b-d622-404f-b41d-9b05ebb60889" class=""><strong>Oracle Cloud Infrastructure Registry (OCIR)</strong></p><ul id="0552ab79-a613-427f-bbf3-0ef06dd742d0" class="bulleted-list"><li style="list-style-type:disc">highly available Docker v2 container registry service</li></ul><ul id="1fc95663-2a1e-43cd-be33-567c24e882c8" class="bulleted-list"><li style="list-style-type:disc">stores docker images in private or public repositories</li></ul><ul id="00f48b20-e77e-4351-972f-4a62bc8b1c8d" class="bulleted-list"><li style="list-style-type:disc">fully managed service on OCI</li></ul><ul id="83255366-2944-4445-8e99-439a07743a2d" class="bulleted-list"><li style="list-style-type:disc">what problems does it solve?<ul id="dd09e693-99f0-49bb-b34c-eaad9dea7d43" class="bulleted-list"><li style="list-style-type:circle">hard for development and operations team to maintain consistent images for containerized applications</li></ul><ul id="45f393ce-43c7-453c-873d-47856c44866a" class="bulleted-list"><li style="list-style-type:circle">unable to enforce access rights and security policies for images</li></ul></li></ul><ul id="11defe83-3ace-4a55-aa81-aa8b81b6f2db" class="bulleted-list"><li style="list-style-type:disc">difficult to find the right images and have them available in region of deployment</li></ul><ul id="020da9c6-e0b4-4644-b851-fe11a8b07845" class="bulleted-list"><li style="list-style-type:disc">what it basically does<ul id="e6623158-38e9-46ae-a442-6f93c61b6caa" class="bulleted-list"><li style="list-style-type:circle">makes it easy for you, as a developer to store, share and manage container images, such as Docker images</li></ul><ul id="f6ed872e-b903-4cd1-8b0b-e8c023602975" class="bulleted-list"><li style="list-style-type:circle">now you can use container registry as a:<ul id="9daae689-3a9c-4236-911d-f1385e907c14" class="bulleted-list"><li style="list-style-type:square">private docker registry - push and pull docker images using standard docker cli</li></ul><ul id="36786920-1484-4859-abf0-30b5f11894b0" class="bulleted-list"><li style="list-style-type:square">public docker registry - enable any user with internet access to pull images from public repositories in container registry</li></ul></li></ul><ul id="ef4a94be-6bb7-4673-bfe3-c5b543eb5564" class="bulleted-list"><li style="list-style-type:circle">you can then deploy these images globally, in any region</li></ul><p id="070a633a-f134-4983-9b26-01dd94fe6a5c" class="">
+</p></li></ul><p id="021667d2-dd64-442b-bbe6-9caeff5c7891" class=""><strong>Repositories</strong></p><ul id="97a754f9-352e-486f-9988-21dfd00a4650" class="bulleted-list"><li style="list-style-type:disc">name in a container registry to push and pull images from</li></ul><ul id="a8956aa4-4024-4c3b-9d51-7cced6d61462" class="bulleted-list"><li style="list-style-type:disc">meaningfully named collection of related images grouped together (such as different versions of the same source image into same repository)</li></ul><ul id="f50e1d1d-04f4-4786-bd1f-62a908843bd3" class="bulleted-list"><li style="list-style-type:disc">you access these images using an image path: &lt;region-key&gt;.<a href="http://ocir.io/">ocir.io/</a>&lt;tenancy-namespace&gt;/&lt;repo-name&gt;:&lt;tag&gt;</li></ul><ul id="0b2e5a25-217d-4867-bffa-387eac25be54" class="bulleted-list"><li style="list-style-type:disc">images to pull are specified in the application&#x27;s manifest file, with a credential to use when pulling</li></ul><ul id="c5ff67a5-8a20-4552-a320-a85b61414e77" class="bulleted-list"><li style="list-style-type:disc">fully integrated with OKE, and Functions API</li></ul><p id="9c0e3193-866f-4450-84a5-0629ceea5004" class="">
+</p><p id="654f1f06-8da3-46df-93e2-26340621c9cd" class=""><strong>DevOps</strong></p><ul id="fa8e082a-3962-4133-a3ca-d2820b0b28ae" class="bulleted-list"><li style="list-style-type:disc">continuous integration and continuous delivery, CI/CD, best practice in DevOps</li></ul><ul id="3099215b-8afb-435c-abde-1adee7cb540c" class="bulleted-list"><li style="list-style-type:disc">continuous integration<ul id="5a2f5a76-3536-46ca-bd3c-a4881ee0ab5b" class="bulleted-list"><li style="list-style-type:circle">frequent, small code changes -&gt; less likely to conflict with other code merges</li></ul><ul id="63fa0d48-a2f8-46ec-95c5-788a5371b8e8" class="bulleted-list"><li style="list-style-type:circle">error fixes continually integrated</li></ul><ul id="5b57cf3d-aa71-46d0-91e1-c7e561fc4f40" class="bulleted-list"><li style="list-style-type:circle">automatic build and test steps</li></ul></li></ul><ul id="90974ea1-c117-431b-9ee6-1a6556714835" class="bulleted-list"><li style="list-style-type:disc">continuous delivery and deployment<ul id="472ceb61-8e15-4770-bb3a-6effabc3402f" class="bulleted-list"><li style="list-style-type:circle">once main code branch passes unit integration acceptance or other tests, it is released to production automatically (continuous deployment) or manually (continuous delivery)</li></ul><ul id="8c8188ec-24f2-4f12-9c5a-c4b6716f9329" class="bulleted-list"><li style="list-style-type:circle">continuous delivery is made possible with a deployment pipeline<ul id="7ef1adee-ac07-4dad-a35d-e05a7c341b43" class="bulleted-list"><li style="list-style-type:square">every time change is committed to code repo -&gt; tested -&gt; marked as release-able or deployable</li></ul><p id="78d02d67-02ea-4256-8262-4d9e1314e514" class="">
+</p></li></ul></li></ul><p id="a2dbd893-0741-4558-8875-7058c38756e7" class=""><strong>OCI DevOps Service</strong></p><ul id="bd36df43-7d1e-4f9d-9a85-dafa949cb3da" class="bulleted-list"><li style="list-style-type:disc">CI/CD platform for developers</li></ul><ul id="e5ca2c7a-fa3b-4a68-8c8c-34df95dd1531" class="bulleted-list"><li style="list-style-type:disc">automates delivery and deployments of software or workloads to OCI compute platforms</li></ul><ul id="e882db55-e368-420a-b987-3b118807650f" class="bulleted-list"><li style="list-style-type:disc">you can release features more frequently with fewer errors and less downtime</li></ul><ul id="b3a6fe74-9337-4947-95d4-26560a456729" class="bulleted-list"><li style="list-style-type:disc">how does it work?<ul id="15d5c944-9088-4b89-a0f7-0b9c4e51824a" class="bulleted-list"><li style="list-style-type:circle">build and deployment pipeline are key components</li></ul><ul id="de38ad21-664d-4228-8b22-7dc8f36f6336" class="bulleted-list"><li style="list-style-type:circle">build pipeline<ul id="57466aa0-ebc7-4a06-97e1-fbba9a17c075" class="bulleted-list"><li style="list-style-type:square">build stage triggered when you commit -&gt; fetches required libraries and assets from code -&gt; creates build artifact (a software package, library, zip file) -&gt; store in a container or artifact registry</li></ul><ul id="58286495-3070-4a49-b064-7b52a980d106" class="bulleted-list"><li style="list-style-type:square">rule of thumb: non-container, non-compute images or artifacts go into artifact registry (eg. zip files, libraries) VS docker image goes into container registry</li></ul></li></ul><ul id="6568c62d-5ad4-4f2b-8865-e0654c38fac5" class="bulleted-list"><li style="list-style-type:circle">deployment pipeline<ul id="0e3ad56c-2b61-43a9-a844-45829f9c6498" class="bulleted-list"><li style="list-style-type:square">artifacts are retrieved and deployed to staging environment -&gt; integration tools are run -&gt; approval -&gt; deployment to production environment (eg. compute hosts - VM or bare metal machine, OKE container engine, or serverless offering like Functions)</li></ul><p id="b94a6c79-630b-481a-9c6c-6b37fc0f8e09" class="">
+</p></li></ul></li></ul><p id="8e4fb235-6373-4f8c-b0c8-0f8ba447cc89" class=""><strong>APIs</strong></p><ul id="f7621a3b-48fd-442f-80f3-eb3c6c04bbea" class="bulleted-list"><li style="list-style-type:disc">REST (representational state transfer) or RESTful APIs</li></ul><ul id="2d02b376-ccdc-4a31-82da-052493f0f9b6" class="bulleted-list"><li style="list-style-type:disc">REST APIs are accessed over HTTP, are stateless, and are client-server communications</li></ul><ul id="dcbbc63d-2a68-4055-a0a7-01813366bcb5" class="bulleted-list"><li style="list-style-type:disc">client and server can be written in different languages</li></ul><ul id="b49ee73f-a34f-49b0-af64-c4b9f730f933" class="bulleted-list"><li style="list-style-type:disc">APIs help clients access a microservice, but this can cause complexity when every client talks to every microservice</li></ul><ul id="fa7dc6fe-0021-4e59-a45c-5aabaa660a21" class="bulleted-list"><li style="list-style-type:disc">we can solve this by putting an API gateway in between clients and microservices -&gt; clients connect to a single endpoint (API gateway), which is configured to forward requests to individual microservices</li></ul><p id="2087c763-6c82-45b0-89e5-dc7468f8e5ac" class="">
+</p><p id="0c9315af-ff9e-4471-8199-7893c0937f4d" class=""><strong>API Gateway</strong></p><ul id="562ebf07-cdb3-48b7-ad41-411b204b448d" class="bulleted-list"><li style="list-style-type:disc">policy for who accesses what API is defined in the gateway, enforcing things like AuthN, SLAs (service level agreements) , and also does things like logging, metrics, monitoring, etc.</li></ul><ul id="080971ea-fd3e-43f1-a5e1-ede2e75c2c9b" class="bulleted-list"><li style="list-style-type:disc">API gateway is where API is made available, so there is an endpoint on the gateway to determine whether request should go to back-end service to serve the request</li></ul><ul id="5551d786-50a1-4acb-838e-ad71bf84c023" class="bulleted-list"><li style="list-style-type:disc">API DOES NOT run on the gateway, but rather the endpoint to access the API is available on the gateway</li></ul><p id="c65a461d-9df7-439e-a8cd-6c70523630ee" class="">
+</p><p id="04ca757e-05dc-4877-bc1f-bb489d686a81" class=""><strong>API Gateway Service</strong></p><ul id="60dacc65-7efa-41cd-8615-c7ee7c19f034" class="bulleted-list"><li style="list-style-type:disc">in OCI, API gateway is a network attached device, much like a load balancer (it is serverless, you create it and it gets attached to your network)</li></ul><ul id="72cc835c-7607-4d8a-8dd9-8fd1002b58d3" class="bulleted-list"><li style="list-style-type:disc">fully managed by Oracle, security policy is enforced, we do monitoring, logging, metrics, some sort of mediation performed</li></ul><ul id="78d030a0-8714-462d-944b-8bd312c12fb1" class="bulleted-list"><li style="list-style-type:disc">features of OCI API gateway<ul id="7ab1e152-4d69-4c38-bf6c-a68e0d61225e" class="bulleted-list"><li style="list-style-type:circle">regional service, appears at network device on customer&#x27;s VCN</li></ul><ul id="526bacec-c8be-44e7-b031-588840f9734a" class="bulleted-list"><li style="list-style-type:circle">authZ</li></ul><ul id="92c5e08f-6f6a-49b6-8ec7-66b1cc83dee9" class="bulleted-list"><li style="list-style-type:circle">rate-limiting<ul id="6bc5d909-5ff2-4e6c-9cf2-42701caf4534" class="bulleted-list"><li style="list-style-type:square">limits the number of API calls to back-end servers</li></ul><ul id="17507ec8-950d-404f-883c-af0b6602cb54" class="bulleted-list"><li style="list-style-type:square">no scenarios where you overwhelm the server and DDOS attack happens</li></ul></li></ul><ul id="3afbc8d5-676f-479d-beda-98df67d3f1e4" class="bulleted-list"><li style="list-style-type:circle">create private and public gateways, in private or public subnets</li></ul><ul id="caf6d1f6-8342-41a0-9148-3da6166ca109" class="bulleted-list"><li style="list-style-type:circle">custom domain</li></ul><ul id="808075c6-46c9-4d9e-967b-79f209a096d6" class="bulleted-list"><li style="list-style-type:circle">monitoring, logging</li></ul><ul id="63a87d8d-8154-43ca-98b4-5eb8a3908a75" class="bulleted-list"><li style="list-style-type:circle">integration with other services (including Oracle Integration Cloud)</li></ul><ul id="af320b2c-9ed0-4168-a1ac-100006def189" class="bulleted-list"><li style="list-style-type:circle">supports Open API standards</li></ul><ul id="b1834008-2728-4af0-87d7-6b0398b2607c" class="bulleted-list"><li style="list-style-type:circle">built in mock testing</li></ul><ul id="94edc1d1-09a9-4964-9c53-8053cfb9d915" class="bulleted-list"><li style="list-style-type:circle">integrated with logging analytics</li></ul><ul id="fd2cfe96-4803-462f-99ab-c7068947d4b5" class="bulleted-list"><li style="list-style-type:circle">use case: API gateway becomes a front-end (facade pattern), or for mock testing and use with third party services</li></ul></li></ul><ul id="3c1a5bac-625f-4291-b603-4593f939a087" class="bulleted-list"><li style="list-style-type:disc">Remember<ul id="60906a21-fd21-44fe-a943-74393f0ca8ef" class="bulleted-list"><li style="list-style-type:circle">when defining an API, you need to define access, so you need some kind of policy, which is defined at the API gateway</li></ul><ul id="4b120081-b726-400c-8b97-61c9ca4e35fe" class="bulleted-list"><li style="list-style-type:circle">API <strong>does not </strong>run on the gateway, the endpoint to access the API is available on the gateway</li></ul><p id="d8c91815-668d-4bac-b2ef-eab7fc2a5e2f" class="">
+</p></li></ul><p id="a4c2bca2-be22-483c-8263-4528dedad7dc" class=""><strong>Functions</strong></p><ul id="439f4a2f-29cd-48f9-b35d-2c1b0bf1b17c" class="bulleted-list"><li style="list-style-type:disc">serverless offering</li></ul><ul id="7a8780d7-64e9-42f7-b3e1-853d177a33de" class="bulleted-list"><li style="list-style-type:disc">increasing abstractions, decreasing concern (and control) over infrastructure implementation<ul id="e0bcd778-3c8e-4fad-9a16-ba7aec37f200" class="bulleted-list"><li style="list-style-type:circle">bare metal &gt; VMs &gt; container &gt; functions</li></ul></li></ul><ul id="9141ba54-ca08-4204-b03c-8e2bdcaf8ca5" class="bulleted-list"><li style="list-style-type:disc">for Functions, you don&#x27;t write code in a specific runtime, you don&#x27;t worry above servers, about infrastructure, the cloud provider is responsible for executing your code</li></ul><ul id="77640eca-9d32-444e-a064-ce3395cc9121" class="bulleted-list"><li style="list-style-type:disc">one of the greatest advantages: truly leads to a consumption based pricing model, where you are only billed for the time your function is running -&gt; you go from a pay-as-you-go pricing to a completely consumption-based pricing (that&#x27;s why more and more people use Functions)</li></ul><ul id="01eac929-18c2-4600-b14a-aa4be8f14a88" class="bulleted-list"><li style="list-style-type:disc">Functions-as-a-service - you write code and code is executed, AKA <strong>event driven architecture</strong><ul id="d5f4a626-49e4-497b-91c5-44c77b350fd8" class="bulleted-list"><li style="list-style-type:circle">in reality, functions run inside container, you are billed only when the function runs</li></ul><ul id="b07e8367-6513-4628-ace9-623b0f40dd95" class="bulleted-list"><li style="list-style-type:circle">very capable of parallel execution</li></ul><ul id="b073b5d8-fe61-4a2c-b681-1c71301e75ca" class="bulleted-list"><li style="list-style-type:circle">oracle functions is powered by Fn project open source engine (unlike other cloud vendors)</li></ul></li></ul><ul id="d1442db8-2a70-400e-afd2-f85ba3f16169" class="bulleted-list"><li style="list-style-type:disc">how does it work?<ul id="2fef9611-38fa-4147-ae99-81ffc4bdf275" class="bulleted-list"><li style="list-style-type:circle">uploaded code and configs is packaged as a container image and stored in OCI registry -&gt; you set up trigger actions (direct invoke: CLI or API; or OCI events) -&gt; code runs when triggered -&gt; pay for code execution time only</li></ul><ul id="bb46d446-91dd-41ac-a070-2e27629474cd" class="bulleted-list"><li style="list-style-type:circle">function integrations - monitoring, identity, registry, logging, network, OCI services</li></ul><p id="2be52c48-a9c6-4c19-98b5-74924c2a39e7" class="">
+</p></li></ul><p id="71edfa91-a5ae-4c41-934f-bdca2c1af929" class=""><strong>Resource Manager (ORM)</strong></p><ul id="7c8ea6a0-3317-4938-9e64-8b2a898f1ced" class="bulleted-list"><li style="list-style-type:disc">helps install, configure, and manage resources through the infrastructure as code model</li></ul><ul id="b2a59440-1ab6-4202-9b5f-1f712c35901c" class="bulleted-list"><li style="list-style-type:disc">think of it as a managed Terraform (infrastructure as code) service<ul id="6e4d2771-bff7-4e4b-836a-2675f5d9d7b3" class="bulleted-list"><li style="list-style-type:circle">you take your infrastructure components and describe them using a high level config syntax</li></ul><ul id="6d3a39cb-8d2f-4aac-84e4-8cebfd78ace4" class="bulleted-list"><li style="list-style-type:circle">this creates a blueprint of your infrastructure that can be versioned and treated like code</li></ul><ul id="56042c8d-522d-40da-a164-ee87882419e9" class="bulleted-list"><li style="list-style-type:circle">it also can be shared and reused</li></ul><ul id="bed02338-5a12-478f-a083-5790c21c1dd9" class="bulleted-list"><li style="list-style-type:circle">you can set up and destroy stacks - that&#x27;s a big deal because it&#x27;s hard to go back and figure out all the dependencies, set something up and destroy that setup</li></ul></li></ul><ul id="77c2e44a-695c-4a90-b596-3af45c35ec9e" class="bulleted-list"><li style="list-style-type:disc">what are some benefits?<ul id="3b1f7883-ba9f-4cd8-a20c-2d115205349a" class="bulleted-list"><li style="list-style-type:circle">improves team collaboration</li></ul><ul id="ae0d494d-e289-4f4c-b7ab-de773e1e4ed4" class="bulleted-list"><li style="list-style-type:circle">enables automation<ul id="6c8a7e48-3615-4ca1-88c6-77fb32ac38b9" class="bulleted-list"><li style="list-style-type:square">config can be treated as code and automated</li></ul></li></ul><ul id="9af643e1-b753-46a5-8535-59bf1bd630bd" class="bulleted-list"><li style="list-style-type:circle">seamless integration with OCI platform<ul id="ac57de8a-12c5-43b9-bf18-deaddc63b408" class="bulleted-list"><li style="list-style-type:square">for eg. if you create a Kubernetes cluster on the OCI console, you can save as Terraform stack, and go on and apply that stack later on</li></ul></li></ul><ul id="ddccac0b-9016-4ecd-a182-59f5133b253a" class="bulleted-list"><li style="list-style-type:circle">provides a console UI experience</li></ul></li></ul><ul id="39973863-88e9-48bd-84e8-86cb8355aeb2" class="bulleted-list"><li style="list-style-type:disc">how does it work?<ul id="4382dfa8-1d88-49c0-876e-f123981cc495" class="bulleted-list"><li style="list-style-type:circle">you upload a bundled terraform config file, your actual terraform code -&gt; you create a stack -&gt; run terraform action against that stack</li></ul><ul id="2914e195-f65d-448f-84e9-b7f2a353c918" class="bulleted-list"><li style="list-style-type:circle">your source can be anywhere: .zip, template, compartment, bucket, folder, git</li></ul><ul id="e277f739-0568-410d-acf3-09caf04aa000" class="bulleted-list"><li style="list-style-type:circle">create a stack (a distinct set of cloud resources) from source -&gt; jobs (standard terraform commands: plan, apply and destroy) are executed against a stack -&gt; refreshed terraform state is securely managed and then refreshed for each terraform action coordinated by resource manager (this ensures a single source of truth for current infrastructure state) [one of the big advantages over doing it yourself]</li></ul></li></ul><ul id="63c3509a-d14a-4b41-8912-b80b176c4554" class="bulleted-list"><li style="list-style-type:disc">Recap<ul id="96c0189a-2887-4036-a5f6-1046dd6f4797" class="bulleted-list"><li style="list-style-type:circle">ORM is a managed terraform service</li></ul><ul id="e10401cd-a4ff-42b3-89b1-c3cd7d4ab3b2" class="bulleted-list"><li style="list-style-type:circle">helps with automating deployments and sharing deployments with the wider team</li></ul></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

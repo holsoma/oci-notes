@@ -1,0 +1,685 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Compute</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="c6ff46e0-252c-496a-9d50-3b51965fd740" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">6️⃣</span></div><h1 class="page-title">Compute</h1><p class="page-description"></p></header><div class="page-body"><p id="e2686524-5d4d-4694-a4a2-1b0661bf0a44" class=""><strong>Compute</strong></p><ul id="e3c5dbc7-8b44-4f1a-bbc9-b282e75fc62e" class="bulleted-list"><li style="list-style-type:disc">virtual machines and bare metal servers</li></ul><ul id="62b74e61-c316-4aee-9457-9799b35b4e4e" class="bulleted-list"><li style="list-style-type:disc">3 defining characteristics: scalability, high performance, lower pricing</li></ul><ul id="f255f23f-c673-4dcf-bd7a-0d7e55e7f7d2" class="bulleted-list"><li style="list-style-type:disc">flexible shapes<ul id="a41b1ce1-4b52-4443-a16d-41449235d8f0" class="bulleted-list"><li style="list-style-type:circle">choose own cores, processors, memory</li></ul><ul id="c30a747d-dcc6-4e62-86f5-988536343beb" class="bulleted-list"><li style="list-style-type:circle">flexibility in choosing your own configuration</li></ul><ul id="27a1a2ef-56ca-4f5a-8b87-52acc9263dba" class="bulleted-list"><li style="list-style-type:circle">flexible sizing: small, medium, large (no need to change machine types)</li></ul></li></ul><ul id="77acbb6c-0a5b-4257-a4d9-3adbd366244f" class="bulleted-list"><li style="list-style-type:disc">bare metal<ul id="fac2db8b-c2d8-471c-b0f5-b01b01b94e1f" class="bulleted-list"><li style="list-style-type:circle">full machine, server, completed dedicated</li></ul></li></ul><ul id="0362f9a5-7ca2-4e49-a115-571676d64736" class="bulleted-list"><li style="list-style-type:disc">dedicated host<ul id="33bb1f14-3858-4598-bb68-feae72360ae5" class="bulleted-list"><li style="list-style-type:circle">full dedicated bare metal machine, but you can run VMs as well</li></ul></li></ul><ul id="8ca55565-a341-4e58-b4d3-920703bb411c" class="bulleted-list"><li style="list-style-type:disc">VMs vs dedicated host<ul id="7d9965a1-f9f3-4288-9653-1a6ff8154908" class="bulleted-list"><li style="list-style-type:circle">VMs are shared and multi-tenant</li></ul><ul id="20bfbbd8-cdc7-4ef3-9714-96630d39dc28" class="bulleted-list"><li style="list-style-type:circle">dedicated host to run own VMs</li></ul></li></ul><ul id="26683077-96b0-40b0-aa7b-b61a6cc0cf4b" class="bulleted-list"><li style="list-style-type:disc">leverage choice of processors - AMD, Intel, and Ampere (Arm-based processor)</li></ul><ul id="46041e70-18ff-44ee-b582-844b3648212f" class="bulleted-list"><li style="list-style-type:disc">industry-leading price performance with Arm - higher price performance with Ampere Altra over AMD Milan</li></ul><ul id="3f33e591-ffb3-49c6-9680-38f29d6a3c74" class="bulleted-list"><li style="list-style-type:disc">50% cheaper than other cloud, pay for what you use</li></ul><ul id="74fa873a-71a9-46cb-987b-a959f6d10052" class="bulleted-list"><li style="list-style-type:disc">you can use preemptible VMs for further savings, these VMs are<ul id="f5f4ddd1-e016-47b1-9a16-321bb63b0dc4" class="bulleted-list"><li style="list-style-type:circle">low cost</li></ul><ul id="b7376a46-322c-4a99-93e0-360cb682364b" class="bulleted-list"><li style="list-style-type:circle">short lived VMs</li></ul><ul id="820dccb0-3c70-47c0-abd2-1b7ddd54af0f" class="bulleted-list"><li style="list-style-type:circle">used for batch jobs</li></ul><ul id="7e35ae90-26db-44db-852d-f6a12a48e3c8" class="bulleted-list"><li style="list-style-type:circle">have fault tolerant workloads</li></ul><ul id="9885bac9-55c8-4a42-872d-787270fefedd" class="bulleted-list"><li style="list-style-type:circle">50% cheaper than other instances</li></ul></li></ul><p id="41eaf1a0-c622-497b-bca2-bb5bfc166757" class=""><strong>Instance Basics</strong></p><ul id="9a48a05b-1381-411f-bb61-2840678b5d09" class="bulleted-list"><li style="list-style-type:disc">an instance is a compute host</li></ul><ul id="bf7560e3-9f1e-47fa-87b3-93b768294b69" class="bulleted-list"><li style="list-style-type:disc">compute host has several dependencies</li></ul><ul id="0bea5331-acd6-41ff-9970-892d9cfd691a" class="bulleted-list"><li style="list-style-type:disc">to have an instance you need a VCN, subnets in the VCN</li></ul><ul id="f55c87fe-e71b-4aed-b18a-6f5dab215a95" class="bulleted-list"><li style="list-style-type:disc">compute host is a physical construct, networking is a virtual construct</li></ul><ul id="a643447f-f78c-49e1-8f2d-fa70f7ee1eac" class="bulleted-list"><li style="list-style-type:disc">they are related - compute host has a network interface card are we virtualize that card (VNIC), and the VNIC is in the subnet (that&#x27;s the association)</li></ul><ul id="d221dede-55f1-46ae-a850-907594d48457" class="bulleted-list"><li style="list-style-type:disc">private IP for compute host comes from VNIC</li></ul><ul id="a7c91a88-c653-4e9f-a7a9-f8d087db1b68" class="bulleted-list"><li style="list-style-type:disc">another set of dependencies compute instances has<ul id="92617b1b-1c44-4ec7-b601-4011ec948e52" class="bulleted-list"><li style="list-style-type:circle">boot volume</li></ul><ul id="40af636f-86a6-425c-85e4-337d7166ac63" class="bulleted-list"><li style="list-style-type:circle">boot disk</li></ul><ul id="85eb302e-467d-4927-90da-35694739cff8" class="bulleted-list"><li style="list-style-type:circle">block volume</li></ul></li></ul><ul id="99ae762c-907a-4166-a837-2e5ea2f11cde" class="bulleted-list"><li style="list-style-type:disc">image (from boot disk) used to boot up instance defines the OS</li></ul><ul id="c67863f8-ed9d-4fbe-b7c9-b42d98b4337b" class="bulleted-list"><li style="list-style-type:disc">data disks live on the network as well, works together with OS disks using the block volume service which the compute hosts uses to run the OS</li></ul><p id="2d718317-9fd3-47d7-8a71-d107c2517d04" class=""><strong>Recap</strong></p><ul id="efcb5ba9-f8c4-42fc-aa8c-f894a64a12c5" class="bulleted-list"><li style="list-style-type:disc">compute control plane has dependency on the networking control plane and the block storage control plane</li></ul><ul id="6b76ac97-e7dc-4407-a6c5-b68782be6abe" class="bulleted-list"><li style="list-style-type:disc">live migration between hosts is important as well to ensure that your applications are also running even during maintenance events</li></ul><p id="e0078f96-da75-4822-94ef-3f223e9c9261" class=""><strong>Demo: Getting Started with Cloud Shell</strong></p><ul id="5cf861e7-8f8c-416e-9c55-69204a4bc210" class="bulleted-list"><li style="list-style-type:disc">ssh-keygen -t rsa -f ocisshkey1</li></ul><ul id="d6d1b506-fec7-48ad-bf9f-a3a37a73fddd" class="bulleted-list"><li style="list-style-type:disc">cat ocisshkey1 (private)</li></ul><ul id="c5f9f269-3c4b-4b7f-8db1-9b0b85e06741" class="bulleted-list"><li style="list-style-type:disc">cat ocisshkey1.pub (public)</li></ul><ul id="1127a3d8-db55-429a-a14f-81be9bd5a294" class="bulleted-list"><li style="list-style-type:disc">provide public key when instantiating an instance, provide private key when connecting</li></ul><p id="aca8dba2-10f5-4761-b222-bcc2dbdb785c" class=""><strong>Demo: Creating a Compute Instance</strong></p><ul id="6bf107ec-acb8-4ac9-9f10-cf0a78094f9f" class="bulleted-list"><li style="list-style-type:disc">you can edit placement to select availability domain (AD)</li></ul><ul id="8ed27261-be8f-4556-8e2b-3dbb6e43a7bc" class="bulleted-list"><li style="list-style-type:disc">you can choose capacity type<ul id="b3aafdf9-26dd-4e6b-a0f4-9544d85ec03a" class="bulleted-list"><li style="list-style-type:circle">on-demand capacity - running an instance on a shared host using on-demand capacity</li></ul><ul id="4c8a7a5e-6871-4b53-959b-2bb47a2f6a69" class="bulleted-list"><li style="list-style-type:circle">preemptible capacity - instances are less expensive, but instances can be reclaimed at any time</li></ul><ul id="76490b40-ba3f-41c5-8a3f-cac52fb20629" class="bulleted-list"><li style="list-style-type:circle">capacity reservation - reserve compute capacity in advance, and use this capacity when you create instances against the reservation</li></ul><ul id="a5745af5-6375-4d2e-b397-3783293353af" class="bulleted-list"><li style="list-style-type:circle">dedicated host - dedicated virtual machine host to run VMs on a dedicated server not shared with customers</li></ul></li></ul><ul id="742b4bcb-4fe0-4cda-91b4-e3990373896b" class="bulleted-list"><li style="list-style-type:disc">you can choose fault domain</li></ul><ul id="f7149614-4217-4368-864e-bfc515bbcd8c" class="bulleted-list"><li style="list-style-type:disc">you can change image (template of virtual hard drive that determines OS and software) and shape (template that determines CPU, amount of memory, VNIC, etc.) [VM vs bare metal machine]</li></ul><ul id="4f335140-f489-482f-ba02-0aff1f135fe7" class="bulleted-list"><li style="list-style-type:disc">you can customize shape or use fixed shape</li></ul><ul id="796bbf76-bb3a-42f1-8c79-d5ab05ccb18f" class="bulleted-list"><li style="list-style-type:disc">network configuration, you can choose VCN and subnet, whether to assign public IP or not</li></ul><ul id="0419dc63-b421-4e4c-b295-7c672f7cd88e" class="bulleted-list"><li style="list-style-type:disc">ssh -i ocisshkey1 opc@&lt;ip&gt;</li></ul><p id="775d74a7-2732-4ec5-afbd-532bc9a35ffa" class=""><strong>Scaling</strong></p><ul id="c6a9d964-604f-4bcb-a890-ede55fe767bb" class="bulleted-list"><li style="list-style-type:disc">vertical scaling<ul id="222399fe-a8ae-4c7c-9338-f13a3cd208f4" class="bulleted-list"><li style="list-style-type:circle">scaling instance shape up or down</li></ul><ul id="4c4a739c-41bb-4f75-9122-8120eeba8b4e" class="bulleted-list"><li style="list-style-type:circle">new shape must have same hardware architecture</li></ul><ul id="d4f0b614-8ccb-4708-869a-c7d81cbdc877" class="bulleted-list"><li style="list-style-type:circle">downtime required</li></ul></li></ul><ul id="c76cc5c3-2458-40ee-ae2f-86d63114593e" class="bulleted-list"><li style="list-style-type:disc">good practice: stop instance before scaling</li></ul><ul id="2d891c3a-e030-482f-a538-5a8aa3721679" class="bulleted-list"><li style="list-style-type:disc">horizontal scaling/autoscaling<ul id="f0500c38-d153-4b87-bb77-146729f66450" class="bulleted-list"><li style="list-style-type:circle">add or take away VMs of the same shape (scale-out or scale-in)</li></ul><ul id="cda22b56-795c-46fe-b531-a29aacd0c8c3" class="bulleted-list"><li style="list-style-type:circle">enables large scale deployment of VMs</li></ul><ul id="86b89582-c0ff-4707-b322-12a16079ea74" class="bulleted-list"><li style="list-style-type:circle">high availability</li></ul><ul id="9637fd9d-1851-4058-9e32-8f58b57ceb9d" class="bulleted-list"><li style="list-style-type:circle">match traffic demand by adding/removing VMs automatically</li></ul><ul id="c4fe9cbd-1d0e-4461-8dd6-3aa57e9871ff" class="bulleted-list"><li style="list-style-type:circle">no extra cost for using autoscaling</li></ul></li></ul><ul id="a5414f6a-797e-44e8-a13d-0daf9169fc05" class="bulleted-list"><li style="list-style-type:disc">three steps to get autoscaling<ul id="f13368ae-8b11-4618-93c9-ff1d70a08f57" class="bulleted-list"><li style="list-style-type:circle">have a running instance, create a config (OS image, metadata, shapes, VNIC, storage, subnets)</li></ul><ul id="667cb4ab-d656-4c92-a8f2-e06d7a47beb8" class="bulleted-list"><li style="list-style-type:circle">create stamp of running instance, take stamp and create instance pool (collection of instances, manage all instances as a unit - start, stop, terminate, put in different ADs)</li></ul><ul id="cb8bd290-6b67-4a60-b17b-82315d0919d4" class="bulleted-list"><li style="list-style-type:circle">take instance pool and write autoscaling rules (initial size, max size, define thresholds)</li></ul></li></ul><p id="93ec6ac6-bdd1-40c9-b18a-fb929a3dfa4b" class=""><strong>Demo: Autoscaling</strong></p><ul id="41cdd15f-aeb2-462f-8fb1-ec20fb8b0176" class="bulleted-list"><li style="list-style-type:disc">create instance configuration (template to define settings)</li></ul><ul id="8b5e6a48-6e5d-43c5-a22e-5925e3444cf2" class="bulleted-list"><li style="list-style-type:disc">create instance pool (you can spread instances across two ADs)<ul id="07bdb391-b3d7-4c7f-be7d-64ea844f2bba" class="bulleted-list"><li style="list-style-type:circle">remember instance pool is to manage multiple instances as a group</li></ul></li></ul><ul id="486ee95b-eaca-4069-89b9-6dcc19f8e1d6" class="bulleted-list"><li style="list-style-type:disc">create autoscaling configuration</li></ul><p id="56ebdf95-834b-4b01-8074-8b2d042c55a4" class=""><strong>OS Management</strong></p><ul id="3da8768d-06c6-451e-a33b-494212256606" class="bulleted-list"><li style="list-style-type:disc">helps sysadmins automate management of Oracle Linux and Windows Server instances</li></ul><ul id="629a9b9f-fc65-4dc5-8cc7-0d279f03c00c" class="bulleted-list"><li style="list-style-type:disc">two main characteristics of the service<ul id="71969027-0a23-40c5-b63a-51f1ca6b821f" class="bulleted-list"><li style="list-style-type:circle">automated patch management</li></ul><ul id="b10dac61-e751-4950-9c3c-e8b185f5b1a5" class="bulleted-list"><li style="list-style-type:circle">simplified package management</li></ul></li></ul><ul id="70358955-5c01-442e-b69e-eb5e68c5517f" class="bulleted-list"><li style="list-style-type:disc">patch management<ul id="fc212776-a4be-49c7-8381-ca82a509c25f" class="bulleted-list"><li style="list-style-type:circle">managing patches which are released, usually to<ul id="9facde24-b6ae-4497-8548-432f0e9cc2a1" class="bulleted-list"><li style="list-style-type:square">fix bugs</li></ul><ul id="d37b874e-0cb5-4c94-8e1a-aaeef54ab08f" class="bulleted-list"><li style="list-style-type:square">improve performance</li></ul><ul id="7a858ee3-3cf9-41f6-8023-a038814a6a79" class="bulleted-list"><li style="list-style-type:square">add features to the OS</li></ul></li></ul><ul id="2e936d23-5125-4f47-83c4-585027c88124" class="bulleted-list"><li style="list-style-type:circle">patching manually is complex and error-prone</li></ul></li></ul><ul id="28f6020d-141d-4274-9ed9-7b6d62d0ddea" class="bulleted-list"><li style="list-style-type:disc">package management<ul id="bb5caf87-efbc-4490-b4a1-7df31c8cad16" class="bulleted-list"><li style="list-style-type:circle">installing, patching and removing software packages</li></ul><ul id="d23eed58-9192-4ae7-a453-b7a3856ccf2e" class="bulleted-list"><li style="list-style-type:circle">hard to catalog installed and available packages and updates</li></ul></li></ul><ul id="a500032f-b57d-42d9-9205-2e37508a7d21" class="bulleted-list"><li style="list-style-type:disc"><strong>automated </strong>patch management<ul id="e2a87e79-5de4-4b5f-ae2e-3d203fdd4d35" class="bulleted-list"><li style="list-style-type:circle">provide single consolidated service</li></ul><ul id="8ec83976-309b-4f29-9c5e-f871760936fe" class="bulleted-list"><li style="list-style-type:circle">supports Oracle Linux and Windows Server</li></ul><ul id="3aa12801-59d9-4086-9d5c-1eedab8370d6" class="bulleted-list"><li style="list-style-type:circle">supports multiple OS versions</li></ul><ul id="b4e735cb-9f75-4dd3-a5af-b1b978685fa3" class="bulleted-list"><li style="list-style-type:circle">works on large group of instances</li></ul></li></ul><ul id="f8114912-a194-40ae-bbec-0e02aa708b46" class="bulleted-list"><li style="list-style-type:disc"><strong>simplified </strong>package management<ul id="102c94fd-c9cd-4b7c-a9a2-c725355c051a" class="bulleted-list"><li style="list-style-type:circle">search and install/remove packages</li></ul><ul id="68da8e95-d7bc-44e3-baec-2c64bed17d8a" class="bulleted-list"><li style="list-style-type:circle">inventory of installed and available packages and updates</li></ul></li></ul><ul id="ca97c78e-c514-457c-b229-4994bb5802ef" class="bulleted-list"><li style="list-style-type:disc">common vulnerabilities and exposures lookup<ul id="ef01aa74-5861-41ac-9304-4367fbfbe88b" class="bulleted-list"><li style="list-style-type:circle">vulnerabilities stored in CBE database</li></ul><ul id="c7770f9c-e198-4523-a67f-ec144b397ec5" class="bulleted-list"><li style="list-style-type:circle">service looks against that database and allows installation of packages to patch vulnerabilities</li></ul></li></ul><ul id="c679a274-a63a-4a59-8c67-31d660edcc59" class="bulleted-list"><li style="list-style-type:disc">OS management service is free</li></ul><p id="96bf35ae-9e81-41f6-baf6-afae744a63c6" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

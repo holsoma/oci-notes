@@ -1,0 +1,688 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Database</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="5e90931b-62f8-42f2-b168-35178b470246" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">8️⃣</span></div><h1 class="page-title">Database</h1><p class="page-description"></p></header><div class="page-body"><ul id="86f3b9d6-abbe-4f5f-a7d4-ff1ae17c9ad5" class="bulleted-list"><li style="list-style-type:disc">OCI offers single-node DB systems on either bare metal or VMs, and 2-node real application cluster DB systems on virtual machines</li></ul><ul id="00a6a93e-91c1-4afd-a67c-7bcd990082a9" class="bulleted-list"><li style="list-style-type:disc">VM DB system<ul id="85768b47-c9a3-4fea-a4f4-dab00ab0e72f" class="bulleted-list"><li style="list-style-type:circle">fast provisioning</li></ul><ul id="0cfad043-e40b-41a7-8e3a-eaf3fade5369" class="bulleted-list"><li style="list-style-type:circle">one-node virtual DB system</li></ul><ul id="14bd136e-0660-4370-bccc-f437ad766f2f" class="bulleted-list"><li style="list-style-type:circle">create DB with logical volume manager as storage management layer</li></ul><ul id="142b68ee-f66a-4bec-aab6-d34998c79906" class="bulleted-list"><li style="list-style-type:circle">alternative is called standard provisioning, provisioned with oracle automatic storage management (ASM)</li></ul></li></ul><ul id="285525d3-da64-49aa-b5ba-a15f044d7699" class="bulleted-list"><li style="list-style-type:disc">bare metal DB system with fast performance<ul id="ca1a77a5-bf79-4376-919e-4ff622c7fce2" class="bulleted-list"><li style="list-style-type:circle">single bare metal server running oracle Linux with locally attached NVMe storage</li></ul><ul id="a1e62325-c5b3-49f4-8ce5-7450f1052448" class="bulleted-list"><li style="list-style-type:circle">if this node fails, you can just launch another system and restore database from current backups</li></ul></li></ul><ul id="4c12fda0-c203-4d9c-a76a-ffb05a7893d3" class="bulleted-list"><li style="list-style-type:disc">2-node real application cluster (RAC) DB system<ul id="00132e40-f69c-4abf-bf30-da0562227dde" class="bulleted-list"><li style="list-style-type:circle">each node is assigned to a different fault domain</li></ul><ul id="c3ce7aee-092b-4b60-a6b4-3c66e7818d0d" class="bulleted-list"><li style="list-style-type:circle">provides high availability</li></ul></li></ul><ul id="4c13f67d-ced2-4839-a916-7482b1f6280d" class="bulleted-list"><li style="list-style-type:disc">exadata cloud service<ul id="7a07b72b-e274-4839-a2b6-915ebb9a7986" class="bulleted-list"><li style="list-style-type:circle">leverage power of exadata in the cloud</li></ul><ul id="4ac75438-fe76-4067-9675-e3413f0040fd" class="bulleted-list"><li style="list-style-type:circle">oracle workloads have highest performance running on this exadata cloud service</li></ul><ul id="74c7b5f4-94aa-4523-8a1d-b36f01383667" class="bulleted-list"><li style="list-style-type:circle">massive scale with managed exadata infrastructure</li></ul></li></ul><ul id="fc45680b-dcf4-42dc-a24c-a28012566b32" class="bulleted-list"><li style="list-style-type:disc">autonomous DBs (shared and dedicated)<ul id="6840fc55-8802-4549-91f6-06031d138918" class="bulleted-list"><li style="list-style-type:circle">cloud database that uses machine learning to automate routine management tasks usually done by DBA (eg. database tuning, security, backups, updates)</li></ul><ul id="eb396e10-78c8-4cd5-808c-d1816c608c55" class="bulleted-list"><li style="list-style-type:circle">supports two kinds of workloads<ul id="17d0b74b-5cd6-4028-80e2-528175ee2fb5" class="bulleted-list"><li style="list-style-type:square">autonomous data warehouse (ADW)</li></ul><ul id="5be4a91d-5015-4a56-9126-146ec13b5378" class="bulleted-list"><li style="list-style-type:square">autonomous transaction processing (ATP)</li></ul></li></ul><ul id="b24943da-cfb1-41c9-abc2-800eea0531ec" class="bulleted-list"><li style="list-style-type:circle">with exadata, you hear 3 terms all the time<ul id="bee59823-f489-48e9-aa68-3c4c86f3d4cd" class="bulleted-list"><li style="list-style-type:square">self-driving</li></ul><ul id="d2e75eae-3c13-427d-ba25-0299249a8bbe" class="bulleted-list"><li style="list-style-type:square">self-securing</li></ul><ul id="8469e063-6fc7-44e1-8f7d-23ba0c92fe24" class="bulleted-list"><li style="list-style-type:square">self-repairing</li></ul></li></ul></li></ul><ul id="60577d50-f2a3-4d70-9905-0604ec468c7c" class="bulleted-list"><li style="list-style-type:disc">autonomous shared DB<ul id="4159ef89-8b10-4870-a6a1-34043e4e806b" class="bulleted-list"><li style="list-style-type:circle">provision and manage only the autonomous DB</li></ul><ul id="c9f837d2-9456-4f14-888d-1cf41494ec09" class="bulleted-list"><li style="list-style-type:circle">Oracle handles exadata infrastructure development and management</li></ul><ul id="5b451a79-cf46-4744-896e-4330c6d95915" class="bulleted-list"><li style="list-style-type:circle">multi-tenant shared environment</li></ul></li></ul><ul id="a684a8be-d283-4600-b70d-45a6a03af196" class="bulleted-list"><li style="list-style-type:disc">autonomous dedicated DB<ul id="56b3df83-20c1-4aa8-84d7-8025f7fa1a0c" class="bulleted-list"><li style="list-style-type:circle">exclusive use of exadata hardware</li></ul><ul id="ddb0046e-f1ce-4abc-9ebc-b65eb0c9dcc2" class="bulleted-list"><li style="list-style-type:circle">single tenant dedicated to you</li></ul></li></ul><ul id="ec1d7f45-3027-45b1-b7d6-2e28963b45f5" class="bulleted-list"><li style="list-style-type:disc">other options: open source databases<ul id="29854e1c-38ab-4352-9ad1-ccd6b08f3fd5" class="bulleted-list"><li style="list-style-type:circle">MySQL, fully managed OCI service, by MySQL team working within Oracle</li></ul><ul id="ef083837-f173-4df4-8e76-1b05f3c57eef" class="bulleted-list"><li style="list-style-type:circle">NoSQL, on-demand throughput and storage based provisioning, supports JSON, table and key-value data types with flexible transaction guarantees and single digit millisecond latencies</li></ul><ul id="ed7e32db-5eac-4778-afbf-e8b4e53335cd" class="bulleted-list"><li style="list-style-type:circle">autonomous JSON database, geared towards developing NoSQL style applications that use JSON documents</li></ul><p id="3f8c1a05-e8de-4af2-ab75-15189f84b652" class="">
+</p></li></ul><p id="8b3bc9fa-491b-4370-adfa-68c12c71135e" class=""><strong>Autonomous Databases</strong></p><ul id="48bd2200-e661-4f3b-b41a-45a0baa1619b" class="bulleted-list"><li style="list-style-type:disc">all database and infrastructure management processes (eg. monitoring, tuning) are automated, and your DBS can focus on more important tasks</li></ul><ul id="63c95e5c-4d8c-498f-a7cc-1e8bcf0f4065" class="bulleted-list"><li style="list-style-type:disc">autonomous DBs have complete infrastructure automation, complete database automation and automated data center operations and machine learning (automates entire database stack, don&#x27;t have to do repetitive and error prone tasks)</li></ul><ul id="41602c70-e90d-44ec-bef4-d31a2bbacef5" class="bulleted-list"><li style="list-style-type:disc"><strong>shared</strong> - you provision and manage only the autonomous database, oracle handles exadata infrastructure deployment and management<ul id="bc54e49c-0a85-4ba3-8b91-8b51e76f972a" class="bulleted-list"><li style="list-style-type:circle">supported for both ATP and ADW</li></ul></li></ul><ul id="c9c1d894-0c71-4185-a287-91d0c44703b1" class="bulleted-list"><li style="list-style-type:disc"><strong>dedicated - </strong>exclusive use of the exadata hardware and underlying hardware, autonomous DB and exadata completely dedicated to you<ul id="6bf9b824-54cd-42b8-be41-0b6f486843fe" class="bulleted-list"><li style="list-style-type:circle">supported for both ATP and ADW</li></ul></li></ul><ul id="e0fc28c1-62a5-4a0c-9951-e171531c840a" class="bulleted-list"><li style="list-style-type:disc">autonomous transaction processing (ATP) for OLTP</li></ul><ul id="5d8f5a83-0f53-4b0c-a3b7-6dbbd8ced425" class="bulleted-list"><li style="list-style-type:disc">autonomous data warehouse (ADW) for online analytical processing</li></ul><ul id="556f0fab-e356-4a8a-9677-4ab5aaaa2d7f" class="bulleted-list"><li style="list-style-type:disc"><strong>complete database automation - </strong>self-securing, capabilities to protect against both external attack and malicious internal users<ul id="243345db-51d4-4a13-9ce5-ac6fdd4f33bc" class="bulleted-list"><li style="list-style-type:circle">provisioning, scale-up and scale-out, tuning, security and patching, fault tolerance</li></ul><ul id="8b40340b-5c03-47d3-8a1a-b2107fa9f107" class="bulleted-list"><li style="list-style-type:circle">RAC, data guard, database vault features still available</li></ul><ul id="275f1d5c-a00e-4f45-945f-64602e7e945d" class="bulleted-list"><li style="list-style-type:circle">mission critical, simple, low risk and cost</li></ul></li></ul><ul id="f2528070-5b5d-4cd7-8aa1-0c24521e07f8" class="bulleted-list"><li style="list-style-type:disc"><strong>does not support MySQL</strong></li></ul><p id="b0db5a0c-54cd-4eed-9d54-1ac668025990" class="">
+</p><p id="9adf4152-af17-45ec-b66a-ee5f1a4318e8" class=""><strong>DB Systems</strong></p><ul id="17845da4-5f69-42e9-a624-7be5fd617455" class="bulleted-list"><li style="list-style-type:disc">fully managed oracle DBs running in cloud</li></ul><ul id="d7ab92af-67ee-4ced-a194-f7f498aa84f6" class="bulleted-list"><li style="list-style-type:disc">support enterprise or standard edition<ul id="f4062c8c-2e0f-41ea-b618-bc4e28f5ed29" class="bulleted-list"><li style="list-style-type:circle">4-tiers of oracle licensing options, including BYOL</li></ul></li></ul><ul id="11d349ca-0753-4ec0-be29-746a9378b935" class="bulleted-list"><li style="list-style-type:disc">can be run in VMs or bare metal shapes</li></ul><ul id="29ea6c06-ba93-4dd1-b8a6-886536e14b46" class="bulleted-list"><li style="list-style-type:disc">exadata is supported</li></ul><ul id="36700583-a6a9-4539-9c01-e93cae3abcf7" class="bulleted-list"><li style="list-style-type:disc">available in OCI regions around the world</li></ul><ul id="76ab661d-e3df-4569-b81d-8e7f867cd6e9" class="bulleted-list"><li style="list-style-type:disc">cloud automation under customer control - provisioning, patching, backup, disaster recovery</li></ul><ul id="2ce97d17-81cf-4f76-9725-69d664922dc8" class="bulleted-list"><li style="list-style-type:disc"><strong>oracle DB on VMs</strong><ul id="59644354-8d54-46dd-b87c-038e0160c0cf" class="bulleted-list"><li style="list-style-type:circle">up to 24 OCPUs</li></ul><ul id="2682aa8d-1aba-48ad-b7cd-8728e949e394" class="bulleted-list"><li style="list-style-type:circle">up to 320 GB ram</li></ul><ul id="27656b63-919f-4841-9d04-7bebefd2f67b" class="bulleted-list"><li style="list-style-type:circle">up to 40TB of usable block-volume storage</li></ul><ul id="0054dafa-5508-47e0-b68a-b097ca08ffe5" class="bulleted-list"><li style="list-style-type:circle">remember: data in block storage can be stored beyond lifecycle of the compute instance itself</li></ul></li></ul><ul id="1ac86705-6ef5-4f9a-8f36-d0bf1b81dfb5" class="bulleted-list"><li style="list-style-type:disc"><strong>oracle RAC on VMs</strong><ul id="8bccce5e-0531-4367-9b95-a39f450e674d" class="bulleted-list"><li style="list-style-type:circle">up to 48 OCPUs</li></ul><ul id="cb9c6d50-a792-4ebe-a976-5e06862917e6" class="bulleted-list"><li style="list-style-type:circle">up to 640GB ram</li></ul><ul id="d07dd8f8-0e4f-4564-9ddf-c324347e381d" class="bulleted-list"><li style="list-style-type:circle">up to 40TB of usable block-volume storage</li></ul><ul id="67d28366-f40f-4d07-b2b5-141c2b922125" class="bulleted-list"><li style="list-style-type:circle">high availability by creating two nodes in RAC configuration</li></ul><ul id="f81ba088-b594-4ba9-b6b9-8bd4a2b3305c" class="bulleted-list"><li style="list-style-type:circle">extreme performance edition</li></ul></li></ul><ul id="b579dbfe-ff7b-4f8e-9e33-daa777b43cc0" class="bulleted-list"><li style="list-style-type:disc"><strong>oracle DB on bare metal</strong><ul id="d71a512a-0e25-454a-b80a-3cd95df8064d" class="bulleted-list"><li style="list-style-type:circle">up to 52 OCPUs</li></ul><ul id="e3e18aeb-9269-4295-81fd-494c9164afc6" class="bulleted-list"><li style="list-style-type:circle">768GB ram</li></ul><ul id="c560bf61-d806-4d6e-ba1a-fb15cde906e3" class="bulleted-list"><li style="list-style-type:circle">up to 16TB of usable NVMe local storage</li></ul></li></ul><ul id="f19adc2f-8f1e-45d4-b777-942b68f76002" class="bulleted-list"><li style="list-style-type:disc">quickly provision something -&gt; use VM</li></ul><ul id="4a10e06a-3115-4d60-b94e-c30d4b687080" class="bulleted-list"><li style="list-style-type:disc">fast performance -&gt; use bare metal option</li></ul><ul id="8d5f0357-9da1-4714-b335-29d919345c7f" class="bulleted-list"><li style="list-style-type:disc">even greater performance -&gt; use exadata DB systems</li></ul><ul id="d1803f1e-b622-4e99-a462-b75c196d9db8" class="bulleted-list"><li style="list-style-type:disc">high availability is supported<ul id="3819420c-40e3-4be0-ba7d-f1d9d9bd9259" class="bulleted-list"><li style="list-style-type:circle">using real application cluster (RAC)</li></ul><ul id="78208552-aaa6-485c-9fbf-944214587b0a" class="bulleted-list"><li style="list-style-type:circle">data guard, where you can create a primary and a stand by, synchronizing your data in the same region or across regions</li></ul></li></ul><ul id="1e9ac9f8-72c6-490b-a54d-9154bd473114" class="bulleted-list"><li style="list-style-type:disc">scalability<ul id="40243376-93dd-452b-9c91-74098fa1b4ad" class="bulleted-list"><li style="list-style-type:circle">through dynamic CPU and storage scaling</li></ul><ul id="db1ebe68-9ca1-4154-a902-bb5cd216a58a" class="bulleted-list"><li style="list-style-type:circle">increase up and down and change your storage</li></ul></li></ul><ul id="f755769e-a7c7-4221-952a-dd3a7257ea70" class="bulleted-list"><li style="list-style-type:disc">security<ul id="adb43b82-3fa9-4193-9b96-00922a284b1c" class="bulleted-list"><li style="list-style-type:circle">inbuilt in multiple layers, security in the infrastructure layer through thing like identity, access management, authZ, authN</li></ul><ul id="5dfcf5f4-22f3-4eb9-b62f-667ff19d7cc8" class="bulleted-list"><li style="list-style-type:circle">there is security within the database, transparent data encryption, encrypted backups, encrypted block volumes</li></ul></li></ul><ul id="08efc0e9-ee7a-40c0-be39-bea8492b014f" class="bulleted-list"><li style="list-style-type:disc">you can BYOL, permanent billing is supported</li></ul><p id="b73c1dbd-89cc-4a7d-b29e-ce94b181e2c3" class="">
+</p><p id="1b554a6a-c003-4a9f-a118-3fe7eccd738e" class=""><strong>MySQL</strong></p><ul id="12ef6125-fd17-42ca-bd18-156e1a2f65a3" class="bulleted-list"><li style="list-style-type:disc">host mySQL databases in the cloud<ul id="a2fdd42e-f726-4775-b965-39c2bba09c91" class="bulleted-list"><li style="list-style-type:circle">rapid provisioning of MySQL server instances</li></ul><ul id="ddd5d089-f86a-4ea7-92fe-eb4d09ee2561" class="bulleted-list"><li style="list-style-type:circle">easy to test, apply and roll back patches</li></ul></li></ul><ul id="4d68c8c2-9cf0-43bc-8328-ec0459eb3235" class="bulleted-list"><li style="list-style-type:disc">scale quickly, cheaply and efficiently<ul id="66aab9d8-d530-4c66-9506-b9b5852fa16d" class="bulleted-list"><li style="list-style-type:circle">elastic compute - increase or decrease resources as required</li></ul><ul id="28d1e04d-0bf7-426b-ab36-f0d6844ed2a8" class="bulleted-list"><li style="list-style-type:circle">elastic storage - expand storage capacity when your data grows</li></ul><ul id="46bd686c-e33e-41c1-80da-73d2b79d10e1" class="bulleted-list"><li style="list-style-type:circle">elastic replication - distribute workloads dynamically</li></ul></li></ul><ul id="2a83db4d-2dca-4169-a8b0-92f282757103" class="bulleted-list"><li style="list-style-type:disc">improve security by protecting against attacks and misuse with advanced tools, ensure regulatory compliance</li></ul><ul id="fe3aec77-c6c9-4ad5-8447-f82bb2c84e7d" class="bulleted-list"><li style="list-style-type:disc">reduces cost of ownership because you are now using MySQL as a cloud service instead of running it on your own</li></ul><ul id="1428f022-fe50-4707-84ce-2d7ec1e5c608" class="bulleted-list"><li style="list-style-type:disc">high availability- fault tolerant, automatic failover, zero data loss (create high availability database rather than standalone MySQL database)</li></ul><ul id="faccd6a2-747d-40e2-b890-5f7b4b3b6dec" class="bulleted-list"><li style="list-style-type:disc">standalone<ul id="f5ba23e7-d526-4718-8e76-6104aa408e45" class="bulleted-list"><li style="list-style-type:circle">standalone is good for dev and test environment</li></ul><ul id="2cf885b1-e116-4e21-9092-2c8a9109a0f5" class="bulleted-list"><li style="list-style-type:circle">back-ended by resilient and secure OCI block volume</li></ul></li></ul><ul id="9f355d5d-a2b7-4f18-9774-b653f95dfe16" class="bulleted-list"><li style="list-style-type:disc">high availability<ul id="e2dd6db5-4568-48de-aeb1-d8ff0e53cfd6" class="bulleted-list"><li style="list-style-type:circle">high availability option is good for production environment and enables application to meet higher uptime requirements</li></ul><ul id="fcafc863-6137-4e78-89be-347f6cd45eed" class="bulleted-list"><li style="list-style-type:circle">set up the zero data loss tolerance, in the case of a failure, there is automatic failover within minutes toa secondary instance + no reconfiguration needed</li></ul></li></ul><ul id="d83d29cb-d880-421f-b2f8-39f3a5af9c3e" class="bulleted-list"><li style="list-style-type:disc">MySQL database service with heatwave<ul id="a7c2e5f6-0058-4939-bc82-ca1beece6cee" class="bulleted-list"><li style="list-style-type:circle">heatwave is a new integrated, high-performance, in-memory <strong>query accelerator</strong></li></ul><ul id="e6fe5ea5-d74a-4356-8ce9-fef734ef1a4a" class="bulleted-list"><li style="list-style-type:circle">by order of magnitude for analytics and transaction queries</li></ul><ul id="8b6ccac0-f937-4fa0-9c02-e8e85cebe31a" class="bulleted-list"><li style="list-style-type:circle">scales out to thousands of cores</li></ul><ul id="52b932c6-1f84-41ca-8382-b074b4939b45" class="bulleted-list"><li style="list-style-type:circle">only service that allows DBAs to run both OLTP and OLAP workloads directly from MySQL database<p id="9f56d49e-47f0-4ca8-84cc-6c301af15011" class="">
+</p></li></ul></li></ul><p id="1a5b534c-b974-4346-ba34-8d10c1437dc5" class=""><strong>NoSQL</strong></p><ul id="ab4e40ee-8ef0-4162-88d5-eee0350ef4ab" class="bulleted-list"><li style="list-style-type:disc">fully managed<ul id="e161aa8a-9817-4a38-8a02-c5521fc1e91c" class="bulleted-list"><li style="list-style-type:circle">database operation, maintenance tuning managed by oracle</li></ul></li></ul><ul id="887ddfcf-9edb-4675-9391-d9d845ccf7fd" class="bulleted-list"><li style="list-style-type:disc">elastic<ul id="0189df74-d65f-42d0-9a63-1a94d09b836b" class="bulleted-list"><li style="list-style-type:circle">dynamically change throughput and storage capacities based on workloads</li></ul></li></ul><ul id="b957fe5d-b9a1-41e1-859c-8afe16a55211" class="bulleted-list"><li style="list-style-type:disc">high performance<ul id="624df38d-11c1-4a74-8489-f117c4c23e4c" class="bulleted-list"><li style="list-style-type:circle">predictable single-digit millisecond latencies with high workloads</li></ul></li></ul><ul id="d735d476-fa47-4833-b429-aba4b53dcfb0" class="bulleted-list"><li style="list-style-type:disc">data model flexibility<ul id="04142cfd-92f5-409e-9e5c-0290cb5545b3" class="bulleted-list"><li style="list-style-type:circle">document, fixed schema key/value models supported with a single application interface</li></ul></li></ul><ul id="858b9b90-d1be-4063-afd3-c587ac4a6b42" class="bulleted-list"><li style="list-style-type:disc">access control<ul id="86eccf7a-cad6-429a-a412-b5fb99c6293b" class="bulleted-list"><li style="list-style-type:circle">enterprise grade security with roles and privileges</li></ul></li></ul><ul id="4029a0a5-782c-4a59-95fd-41b34db0095a" class="bulleted-list"><li style="list-style-type:disc">low operating cost<ul id="ce7e13e8-80d0-42f5-99f3-4de56860250a" class="bulleted-list"><li style="list-style-type:circle">pay only for the throughput and storage capacities provisioned</li></ul></li></ul><ul id="cd6b6541-22e5-4a37-812e-cddfc369de32" class="bulleted-list"><li style="list-style-type:disc">developer friendly<ul id="9cd613eb-7589-4329-9dad-af9759a37cfe" class="bulleted-list"><li style="list-style-type:circle">easy to use APIs and integrated with different developer tools</li></ul></li></ul><ul id="ec1f349e-f30e-4710-8980-4e14e205bd88" class="bulleted-list"><li style="list-style-type:disc">always available<ul id="b9e4f657-3116-45d8-99fe-a09cb3b28c10" class="bulleted-list"><li style="list-style-type:circle">built-in high availability to ensure business continuity</li></ul></li></ul><ul id="9cb59d1e-bdf5-4627-9cc0-711e69434aa3" class="bulleted-list"><li style="list-style-type:disc">hybrid cloud<ul id="e737d3d3-b792-4d2c-850a-d25d87a8905b" class="bulleted-list"><li style="list-style-type:circle">NoSQL with on premise solution using a single application interface</li></ul></li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
