@@ -1,0 +1,684 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Auto ML</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(0, 0, 0, 0.06); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6bd8fb68-eba1-4ffc-baf1-d7fd80c9d52f" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">4️⃣</span></div><h1 class="page-title">Auto ML</h1><p class="page-description"></p></header><div class="page-body"><nav id="f12233e7-d5a2-4e9d-bd01-c14fcd6c7592" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ed10defa-a0e8-41eb-9a9b-501a2b3353a3">Introduction to Oracle AutoML</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ffacff87-dae2-48cc-bf6f-2d9230e74567">Algorithm Selection</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#8d1d4a74-d02c-40b9-8c7b-44636f5d2ccb">Adaptive Sampling</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3cb6d9b1-d902-4de9-a301-96e1cb4c13d9">Feature Selection</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b1cd7c61-098e-4f51-87c3-be2eafe0f2a5">Hyperparameter Tuning</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d2ed1f31-4db5-43d7-b584-05cc3ad4bc9b">AutoML with OML4Py</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#57a9ac35-56c9-4091-a097-2e8957fa9b66">oml.automl.AlgorithmSelection</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5b552ead-6ad2-4aa4-92ea-61f5b8dd7e20">oml.automl.FeatureSelection</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4a8e13af-ffcd-4056-b2dc-0715278e690e">oml.automl.ModelTuning</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ea35909f-ab59-4ba2-8e0d-db06aef365d1">oml.automl.ModelSelection</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#10354308-47ba-42c0-afb0-82e0f5a8ae3b">OML AutoML UI</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#cccf1c30-4e7c-4f2f-a8bc-255e27112414">Deploying</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c3dd6305-e32d-4304-87b6-29470572f2fe">Skill Check</a></div></nav><h1 id="ed10defa-a0e8-41eb-9a9b-501a2b3353a3" class="">Introduction to Oracle AutoML</h1><ul id="dc02ca38-4711-4a18-806b-6a09f92a1681" class="bulleted-list"><li style="list-style-type:disc">autoML automates the machine learning workflow</li></ul><ul id="3a765a84-b14f-412f-b210-5fe24b100b0a" class="bulleted-list"><li style="list-style-type:disc">can be implemented through OML for Python and AutoML UI</li></ul><ul id="10136911-5e0d-4fc1-b17a-9d7ee0742938" class="bulleted-list"><li style="list-style-type:disc">the pipeline consists of four steps (algorithm selection, adaptive sampling, feature selection, and hyperparameter tuning)<ul id="14eac4fc-29a7-4cdc-9b58-b9475dce48fe" class="bulleted-list"><li style="list-style-type:circle">algorithm selection - identifies top k algorithms that maximizes model score</li></ul><ul id="9e2abb7e-36b3-482a-ac8b-1500f2a76479" class="bulleted-list"><li style="list-style-type:circle">adaptive sampling - finds the smallest sample size that represents the full data set</li></ul><ul id="20b17bcc-7431-4e8f-a264-d445bcb55b1d" class="bulleted-list"><li style="list-style-type:circle">feature selection - subset of features that are highly predictive of the target are selected</li></ul><ul id="1bb01627-c7ee-415f-8302-c16fc6aeff3a" class="bulleted-list"><li style="list-style-type:circle">hyperparameter tuning - optimal values for the model’s hyperparameters are found</li></ul></li></ul><h2 id="ffacff87-dae2-48cc-bf6f-2d9230e74567" class="">Algorithm Selection</h2><ul id="c0e53ca0-898e-4b5b-8134-60fd82f7f896" class="bulleted-list"><li style="list-style-type:disc">choose an algorithm that provides a model with the highest predictive accuracy (processes a list of algorithms and ranks them according to performance)</li></ul><ul id="94633acd-8dba-4e61-978e-055c6ee9abca" class="bulleted-list"><li style="list-style-type:disc">steps involved:<ul id="4e4fa541-10d1-4948-a9df-84682885dee7" class="bulleted-list"><li style="list-style-type:circle">extract characteristics in dataset like shape and feature correlations</li></ul><ul id="66bc488e-ee00-4141-934e-2838c50b7730" class="bulleted-list"><li style="list-style-type:circle">invoke specialized score prediction models, capable of predicting algorithm performance across a variety of datasets and domains</li></ul><ul id="33c0f1bc-cc46-4834-a508-fbfc9bc1ba42" class="bulleted-list"><li style="list-style-type:circle">rank algorithms based on predicted performance, select optimal algorithm (smaller the dataset the better the model performance → processing time is lesser [real-world datasets are significantly large!])</li></ul><ul id="39956427-ebd5-468f-8db8-327409c41544" class="bulleted-list"><li style="list-style-type:circle">select top k algorithms</li></ul></li></ul><h2 id="8d1d4a74-d02c-40b9-8c7b-44636f5d2ccb" class="">Adaptive Sampling</h2><ul id="60aae098-5780-4ea8-9c7b-62523082dc1a" class="bulleted-list"><li style="list-style-type:disc">select a sample of a data set which adequately represents the original data set (make the data set smaller → shorten processing time)</li></ul><ul id="03498782-8a5b-4dd8-a790-78e26e6a123f" class="bulleted-list"><li style="list-style-type:disc">iteratively sub-samples the dataset and evaluates each sample to obtain a model score → used to find smallest sample size that represents data set</li></ul><ul id="10f2b2d7-0447-42cb-afef-743c5d4f3a43" class="bulleted-list"><li style="list-style-type:disc">steps involved:<ul id="496b09c0-12bb-4ccc-90cc-9db58a140ccf" class="bulleted-list"><li style="list-style-type:circle">identify representative sample for given data set and algorithm</li></ul><ul id="7caba548-1673-4453-8d2d-10d8107e28fe" class="bulleted-list"><li style="list-style-type:circle">predict algorithm performance on the sample (measure model score), optimize until score converges </li></ul></li></ul><h2 id="3cb6d9b1-d902-4de9-a301-96e1cb4c13d9" class="">Feature Selection</h2><ul id="25f38f30-e4df-4112-b95d-5f889e0497a4" class="bulleted-list"><li style="list-style-type:disc">choose features in dataset which are highly predictive of the target</li></ul><ul id="124bd078-0d1d-481a-a88a-ca76fdb4d0c9" class="bulleted-list"><li style="list-style-type:disc">only select those features to increase speed of model training</li></ul><ul id="95782d1f-7ff7-4df1-b52f-310ed8293430" class="bulleted-list"><li style="list-style-type:disc">accelerated data science (ADS) to identify optimal feature subset</li></ul><ul id="21916784-68e0-4308-9818-6ce06878ef20" class="bulleted-list"><li style="list-style-type:disc">steps involved:<ul id="b2148832-8009-408a-b540-4ce575eec3b6" class="bulleted-list"><li style="list-style-type:circle">obtain meta features of the dataset (recommended features by dataset’s metadata/past dataset characterizations)</li></ul><ul id="ab707c08-74cb-4647-954b-c8b07ad61f28" class="bulleted-list"><li style="list-style-type:circle">use multiple ranking algorithms to rank the features<ul id="791758a8-e99e-476a-9c22-37834b4fa59b" class="bulleted-list"><li style="list-style-type:square">for each ranking, find optimal feature subset</li></ul><ul id="39f0218a-bf7e-43ea-8cf5-7b5e18f56d82" class="bulleted-list"><li style="list-style-type:square">predict algorithm performance on a given feature subset</li></ul></li></ul><ul id="6eaa454e-26a0-483a-82a6-0dbd4ff492e2" class="bulleted-list"><li style="list-style-type:circle">iterate over multiple ranking algorithms</li></ul></li></ul><h2 id="b1cd7c61-098e-4f51-87c3-be2eafe0f2a5" class="">Hyperparameter Tuning</h2><ul id="a8858213-62f1-4719-ae47-3b9edd5318ba" class="bulleted-list"><li style="list-style-type:disc">determine optimal value for model’s hyperparameters</li></ul><ul id="30f18730-7c1d-4fb1-bcc0-ef11072082bc" class="bulleted-list"><li style="list-style-type:disc">usually time-consuming</li></ul><ul id="b49b196e-a630-4ca6-be6d-e7d073d599c8" class="bulleted-list"><li style="list-style-type:disc">focuses on improving chosen algorithm score on reduced data set (given by adaptive sampling and feature selection)</li></ul><ul id="92a18b14-0c98-4c79-ae1b-f48057445e6f" class="bulleted-list"><li style="list-style-type:disc">ADS novel algorithm to search across hyperparameter dimensions, automatic convergence when optimal hyperparameters are defined and identified</li></ul><h1 id="d2ed1f31-4db5-43d7-b584-05cc3ad4bc9b" class="">AutoML with OML4Py</h1><ul id="c05b1906-31af-482c-b4d9-559c3bc1272e" class="bulleted-list"><li style="list-style-type:disc">oracle advanced meta-learning intelligence to learn from a repertoire of datasets with the goal of avoiding exhaustive searches, reducing compute time and cost</li></ul><h2 id="57a9ac35-56c9-4091-a097-2e8957fa9b66" class="">oml.automl.AlgorithmSelection</h2><ul id="659f7f9a-3d79-4c23-a14b-e03985f14007" class="bulleted-list"><li style="list-style-type:disc">oml.automl.AlgorithmSelection class (supports both classification and regression problems)</li></ul><figure id="66ea2989-bbd3-4651-90f8-2aa777d15825" class="image"><a href="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled.png"><img style="width:1058px" src="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled.png"/></a></figure><figure id="aedde7f8-17a8-4590-81f8-1c6e53add9c2" class="image"><a href="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%201.png"><img style="width:948px" src="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%201.png"/></a></figure><h2 id="5b552ead-6ad2-4aa4-92ea-61f5b8dd7e20" class="">oml.automl.FeatureSelection</h2><ul id="098675ca-22e2-4ffa-85dd-a98a8be2c780" class="bulleted-list"><li style="list-style-type:disc">usues several feature ranking algorithms to identify best feature subset, without comprising model performance</li></ul><figure id="f09c24de-7477-4a53-b820-d1c730e2f4ca" class="image"><a href="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%202.png"><img style="width:1082px" src="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%202.png"/></a></figure><figure id="ddb834fe-cf7a-426b-8dea-8f1d85a9871c" class="image"><a href="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%203.png"><img style="width:1164px" src="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%203.png"/></a></figure><h2 id="4a8e13af-ffcd-4056-b2dc-0715278e690e" class="">oml.automl.ModelTuning</h2><ul id="41c917fa-4852-4fb1-9ecb-2983a31aca00" class="bulleted-list"><li style="list-style-type:disc">tunes hyperparameters</li></ul><ul id="27536217-f537-4856-a693-2b9254a6074b" class="bulleted-list"><li style="list-style-type:disc">automates time-consuming process using highly-parallel, asynchronous, gradient-based hyperparameter optimization algorithm</li></ul><figure id="46e1d428-1d63-4c1f-942f-385f3cd0c25f" class="image"><a href="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%204.png"><img style="width:1165px" src="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%204.png"/></a></figure><figure id="5dd88bac-81bd-4d5b-b1ea-0ec755d9d4f5" class="image"><a href="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%205.png"><img style="width:889px" src="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%205.png"/></a></figure><h2 id="ea35909f-ab59-4ba2-8e0d-db06aef365d1" class="">oml.automl.ModelSelection</h2><ul id="87d4ad5c-1f34-4e0b-acbc-c5c931ac5e19" class="bulleted-list"><li style="list-style-type:disc">class to automatically select OML algorithm according to selected score metric and tune that algorithm</li></ul><figure id="864e89ba-a613-4221-ba9e-6fd18a380ee8" class="image"><a href="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%206.png"><img style="width:1161px" src="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%206.png"/></a></figure><figure id="2b40e2e1-8661-4365-bd8a-f147859411f4" class="image"><a href="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%207.png"><img style="width:988px" src="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%207.png"/></a></figure><h1 id="10354308-47ba-42c0-afb0-82e0f5a8ae3b" class="">OML AutoML UI</h1><ul id="cbed41f6-bf01-421f-aedf-4662bb2b9155" class="bulleted-list"><li style="list-style-type:disc">provides a no-code UI to automate machine learning process</li></ul><ul id="06e71789-e33b-4009-93a6-033fe9e1b35f" class="bulleted-list"><li style="list-style-type:disc">you can select the model you want to deploy through REST endpoint or immediately through SQL queries or OAC or APEX</li></ul><ul id="cbf89693-6c31-4637-aed4-3530d25d8a26" class="bulleted-list"><li style="list-style-type:disc">experiments that follow a pipeline which consists of the following activities</li></ul><figure id="0875d7c3-6c0a-496b-8fa5-4be151d7bded" class="image"><a href="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%208.png"><img style="width:802px" src="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%208.png"/></a></figure><ul id="0dc1bb38-960c-449d-92d3-d0b30fd24937" class="bulleted-list"><li style="list-style-type:disc">monitored with minimal user input required in the entire lifecycle of the experiment</li></ul><ul id="e2ffda06-51bb-414a-a1fd-a5342664e1d1" class="bulleted-list"><li style="list-style-type:disc">when managing models, you can deploy existing OML in-database model as a REST endpoint, un-deploy, and change namespace of a previous deployed model</li></ul><ul id="eed283c1-650e-4797-9289-b1b9ac8601a3" class="bulleted-list"><li style="list-style-type:disc">results shown in a leaderboard according to model metric selected → you can create notebook using OML4Py that will recreate selected AutoML UI model with same settings</li></ul><figure id="9a283b4d-25aa-4fa9-8af0-8b31fe79ba8b" class="image"><a href="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%209.png"><img style="width:605px" src="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%209.png"/></a></figure><ul id="3c59f471-b04d-46e3-b1a6-8f6a1af5683d" class="bulleted-list"><li style="list-style-type:disc">opt for “faster results” if you want to get candidate models sooner at the expense of accuracy</li></ul><ul id="ece8cc13-4ed0-4340-8f6a-5c5fca7497af" class="bulleted-list"><li style="list-style-type:disc">recall: proportion of actual positives that are correctly classified</li></ul><ul id="b50fc721-ac99-4e6c-a17e-0152f9dca8a4" class="bulleted-list"><li style="list-style-type:disc">precision: proportion of predictive positives that are true positives</li></ul><ul id="4afb6627-08a5-4962-8ce8-883318508b69" class="bulleted-list"><li style="list-style-type:disc">F1 score: combines precision and recall into a single number, computed using harmonic mean</li></ul><h2 id="cccf1c30-4e7c-4f2f-a8bc-255e27112414" class="">Deploying</h2><ul id="1858905e-c339-445b-996a-36605fbd74da" class="bulleted-list"><li style="list-style-type:disc">unique alphanumeric name with max 50 characters</li></ul><ul id="11b91229-491a-4e85-af7f-26680c7c6760" class="bulleted-list"><li style="list-style-type:disc">alphanumeric URI with max 200 characters</li></ul><ul id="142961e3-7d07-4eb4-9d7f-d8f31af79438" class="bulleted-list"><li style="list-style-type:disc">version number XX.XX (2.0, 3.1)</li></ul><ul id="9eef7d9b-02a9-4833-a82f-d4ded8327a40" class="bulleted-list"><li style="list-style-type:disc">successful deployed model will be listed in the deployments page, you can view:<ul id="d41d475a-8815-4099-ac16-0a476634dc1c" class="bulleted-list"><li style="list-style-type:circle">model metadata (model name, mining function, algorithm, attributes, etc)</li></ul><ul id="3245679e-59ae-4a8f-bb29-d0690b72eefb" class="bulleted-list"><li style="list-style-type:circle">REST API URI</li></ul></li></ul><ul id="dcc76f80-2c2c-4f99-ad2b-e5ebd97e2ce7" class="bulleted-list"><li style="list-style-type:disc">you can choose deployed model and create notebook using the model</li></ul><h1 id="c3dd6305-e32d-4304-87b6-29470572f2fe" class="">Skill Check</h1><figure id="c8339473-905b-4a4c-a687-dc39d4d36376" class="image"><a href="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%2010.png"><img style="width:710px" src="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%2010.png"/></a></figure><figure id="f83209c3-a1ff-4462-80f4-022e846f4717" class="image"><a href="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%2011.png"><img style="width:887px" src="Auto%20ML%206bd8fb68eba14ffcbaf1d7fd80c9d52f/Untitled%2011.png"/></a></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
